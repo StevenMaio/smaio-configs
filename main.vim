@@ -1,5 +1,5 @@
 " NERDTre settings
-autocmd vimenter * NERDTree	" Start NERDTree on startup
+let NERDTreeIgnore = ['\.pyc$']  " use this to ignore files in NERDTree
 
 " Emmit configuration settings
 let g:user_emmet_leader_key='``' " Edit emmit leader key
