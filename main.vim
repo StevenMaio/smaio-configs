@@ -1,6 +1,3 @@
-" Run Pathogen
-execute pathogen#infect()
-
 " NERDTree settings
 autocmd vimenter * NERDTree	" Start NERDTree on startup
 
