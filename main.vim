@@ -1,4 +1,4 @@
-" NERDTree settings
+" NERDTre settings
 autocmd vimenter * NERDTree	" Start NERDTree on startup
 
 " Emmit configuration settings
@@ -44,7 +44,7 @@ nnoremap <c-e> 5<c-e>	" Makes <c-e> move sligthly faster
 nnoremap <c-y> 5<c-y>	" Makes <c-e> move sligthly faster
 
 " Leader key macros
-nnoremap <leader>ev :vsplit $MYVIMRC<cr> " Quickly open my _vimrc
+noremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr> " Quickl open my _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr> " Quickly source _vimrc
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr> " Toggle smart case
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " wraps the current word in double quotes
