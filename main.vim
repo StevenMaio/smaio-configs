@@ -36,29 +36,45 @@ let mapleader = "-"
 let maplocalleader = "\\"
 
 " Macros
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>		" Turns off the highlights on search results
-inoremap jk <esc>h " returns to normal mode
-inoremap <c-u> <esc>viwU	" capitalizes the current word
-nnoremap <c-u> viwU<esc>e	" capitalizes the current word
-nnoremap <c-e> 5<c-e>	" Makes <c-e> move sligthly faster
-nnoremap <c-y> 5<c-y>	" Makes <c-e> move sligthly faster
+" Turns off the highlights on search results
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+" returns to normal mode
+inoremap jk <esc>h
+" capitalizes the current word
+inoremap <c-u> <esc>viwU
+" capitalizes the current word
+nnoremap <c-u> viwU<esc>e
+" Makes <c-e> move sligthly faster
+nnoremap <c-e> 5<c-e>
+" Makes <c-e> move sligthly faster
+nnoremap <c-y> 5<c-y>
 
 " Leader key macros
-noremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr> " Quickl open my _vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr> " Quickly source _vimrc
-nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr> " Toggle smart case
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " wraps the current word in double quotes
-nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " wraps the current word in single quotes
-vnoremap <leader>" <esc>`<i"<esc>`>la"<esc> " wraps the selected block in double quotes
-cnoremap <leader>' <esc>`<i'<esc>`>la'<esc> " wraps the selected block in single quotes
-nnoremap <leader>nt :NERDTree<cr>			" Open Nerd Tree
+
+" Quickl open my _vimrc
+noremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
+" Quickly source _vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+" Toggle smart case
+nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
+" wraps the current word in double quotes
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+" wraps the current word in single quotes
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+" wraps the selected block in double quotes
+vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
+" wraps the selected block in single quotes
+cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
+" Open Nerd Tree
+nnoremap <leader>nt :NERDTree<cr>
 
 " Abbreviations
-iabbrev @@ stevenmaio.321@gmail.com		" My email
+iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
 
 " Python auto commands
 augroup filetype_python
+	" Shortcut for adding pdb to code
 	autocmd FileType python nnoremap <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
 augroup END
 
