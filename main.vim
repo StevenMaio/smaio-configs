@@ -40,8 +40,9 @@ let maplocalleader = "\\"
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " returns to normal mode
 inoremap jk <esc>h
+inoremap JK <esc>h
 " capitalizes the current word
-inoremap <c-u> <esc>viwU
+inoremap <c-u> <esc>viwU<esc>ea
 " capitalizes the current word
 nnoremap <c-u> viwU<esc>e
 " Makes <c-e> move sligthly faster
