@@ -90,22 +90,22 @@ endfunction
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
 
-" Python auto commands
 augroup filetype_python
 	" Shortcut for adding pdb to code
-	autocmd FileType python nnoremap <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
-	autocmd FileType python nnoremap <leader>/ <esc>:call MyAddComment("#")<cr>
-	autocmd FileType python nnoremap <leader>? <esc>:call MyRemoveComment("#")<cr>
+	autocmd FileType python nnoremap <silent> <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
+	autocmd FileType python nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
+	autocmd FileType python nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
 augroup END
 
-" Auto commands for java
 augroup filetype_java
-	autocmd FileType java nnoremap <leader>/ <esc>:call MyAddComment("//")<cr>
-	autocmd FileType java nnoremap <leader>? <esc>:call MyRemoveComment("//")<cr>
+	autocmd FileType java nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
+	autocmd FileType java nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
 augroup END
 
 " Latex settings
-autocmd FileType latex setlocal spell
+augroup filetype_latex
+   autocmd FileType latex setlocal spell
+augroup END
 
 " HTML Settings
 augroup filetype_html
