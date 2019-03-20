@@ -70,24 +70,21 @@ cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 nnoremap <leader>nt :NERDTree<cr>
 
 " This is the prototype for making comments
-function! AddComment(comment)
+function! MyAddComment(comment)
    let l:col_no = getcurpos()[2] + len(a:comment)
    execute "normal I".a:comment
    execute "normal ".l:col_no."|"
 endfunction
 
-function! RemoveComment(comment)
+function! MyRemoveComment(comment)
    let l:length = len(a:comment)
    let l:col_no = getcurpos()[2] - l:length
-   execute "normal 0"
+   execute "normal ^"
    for i in range(l:length)
       normal x
    endfor
    execute "normal ".l:col_no."|"
 endfunction
-
-nnoremap <leader>/ <esc>:call AddComment("//")<cr>
-nnoremap <leader>? <esc>:call RemoveComment("//")<cr>
 
 " Abbreviations
 iabbrev @@ stevenmaio.321@gmail.com
@@ -97,6 +94,14 @@ iabbrev adn and
 augroup filetype_python
 	" Shortcut for adding pdb to code
 	autocmd FileType python nnoremap <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
+	autocmd FileType python nnoremap <leader>/ <esc>:call MyAddComment("#")<cr>
+	autocmd FileType python nnoremap <leader>? <esc>:call MyRemoveComment("#")<cr>
+augroup END
+
+" Auto commands for java
+augroup filetype_java
+	autocmd FileType java nnoremap <leader>/ <esc>:call MyAddComment("//")<cr>
+	autocmd FileType java nnoremap <leader>? <esc>:call MyRemoveComment("//")<cr>
 augroup END
 
 " Latex settings
