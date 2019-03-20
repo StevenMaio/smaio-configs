@@ -71,15 +71,23 @@ nnoremap <leader>nt :NERDTree<cr>
 
 " This is the prototype for making comments
 function! AddComment(comment)
-   let x = getcurpos()[2]
+   let l:col_no = getcurpos()[2] + len(a:comment)
    execute "normal I".a:comment
-   execute "normal ".x."l"
+   execute "normal ".l:col_no."|"
 endfunction
 
-"function! RemoveComment(comment)
-"   let x = getcurpos()[2] - len(comment)
+function! RemoveComment(comment)
+   let l:length = len(a:comment)
+   let l:col_no = getcurpos()[2] - l:length
+   execute "normal 0"
+   for i in range(l:length)
+      normal x
+   endfor
+   execute "normal ".l:col_no."|"
+endfunction
 
-"noremap <leader>/ <esc>:call AddComment("//")<cr>
+nnoremap <leader>/ <esc>:call AddComment("//")<cr>
+nnoremap <leader>? <esc>:call RemoveComment("//")<cr>
 
 " Abbreviations
 iabbrev @@ stevenmaio.321@gmail.com
