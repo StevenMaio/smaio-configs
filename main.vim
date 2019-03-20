@@ -69,6 +69,18 @@ cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
 nnoremap <leader>nt :NERDTree<cr>
 
+" This is the prototype for making comments
+function! AddComment(comment)
+   let x = getcurpos()[2]
+   execute "normal I".a:comment
+   execute "normal ".x."l"
+endfunction
+
+"function! RemoveComment(comment)
+"   let x = getcurpos()[2] - len(comment)
+
+"noremap <leader>/ <esc>:call AddComment("//")<cr>
+
 " Abbreviations
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
