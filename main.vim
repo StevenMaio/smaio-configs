@@ -86,6 +86,27 @@ function! MyRemoveComment(comment)
    execute "normal ".l:col_no."|"
 endfunction
 
+function! MyWrapComment(commentOpen, commentEnd)
+   let l:col_no = getcurpos()[2] + len(a:commentOpen)
+   execute "normal I".a:commentOpen." "
+   execute "normal A ".a:commentEnd
+   execute "normal ".l:col_no."|"
+endfunction
+
+function! MyRemoveWrapComment(commentOpen, commentEnd)
+   let l:col_no = getcurpos()[2] - len(a:commentOpen)
+   " Remove the comment opener at the beginning
+   execute "normal ^"
+   for i in range(len(a:commentOpen) + 1)
+      normal x
+   endfor
+   execute "normal $"
+   for i in range(len(a:commentEnd) + 1)
+      normal x
+   endfor
+   execute "normal ".l:col_no."|"
+endfunction
+
 " Abbreviations
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
@@ -114,4 +135,12 @@ augroup filetype_html
 	autocmd FileType html setlocal softtabstop=2
 	autocmd FileType html setlocal sw=2
 	autocmd FileType html setlocal expandtab
+	autocmd FileType html nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
+	autocmd FileType html nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
+augroup END
+
+augroup filetype_xml
+   autocmd!
+	autocmd FileType xml nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
+	autocmd FileType xml nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
 augroup END
