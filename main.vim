@@ -72,18 +72,50 @@ nnoremap <leader>nt :NERDTree<cr>
 " This is the prototype for making comments
 function! MyAddComment(comment)
    let l:col_no = getcurpos()[2] + len(a:comment)
-   execute "normal I".a:comment
+   execute "normal 0i".a:comment
    execute "normal ".l:col_no."|"
 endfunction
 
 function! MyRemoveComment(comment)
    let l:length = len(a:comment)
    let l:col_no = getcurpos()[2] - l:length
-   execute "normal ^"
+   execute "normal 0"
    for i in range(l:length)
       normal x
    endfor
    execute "normal ".l:col_no."|"
+endfunction
+
+function! MyBlockComment(comment)
+    let l:line_no = getcurpos()[1]
+    let l:col_no = getcurpos()[2]
+    execute "normal '<"
+    let l:first_line_no = getcurpos()[1]
+    execute "normal '>"
+    let l:last_line_no = getcurpos()[1]
+    echom l:first_line_no.",".l:last_line_no
+    if l:last_line_no == l:first_line_no
+        call MyAddComment(a:comment)
+    else
+        execute ":'<,'>call MyAddComment(\"".a:comment."\")"
+    endif
+endfunction
+
+function! MyRemoveBlockComment(comment)
+    let l:line_no = getcurpos()[1]
+    let l:col_no = getcurpos()[2]
+    execute "normal '<"
+    let l:first_line_no = getcurpos()[1]
+    execute "normal '>"
+    let l:last_line_no = getcurpos()[1]
+    echom l:first_line_no.",".l:last_line_no
+    if l:last_line_no == l:first_line_no
+        call MyAddComment(a:comment)
+    else
+        execute ":'<,'>call MyRemoveComment(\"".a:comment."\")"
+    endif
+    execute "normal ".l:line_no."G"
+    execute "normal ".l:col_no."|"
 endfunction
 
 " Abbreviations
@@ -95,11 +127,15 @@ augroup filetype_python
 	autocmd FileType python nnoremap <silent> <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
 	autocmd FileType python nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
 	autocmd FileType python nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
+	autocmd FileType python vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
+	autocmd FileType python vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
 
 augroup filetype_java
-	autocmd FileType java nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
-	autocmd FileType java nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
+	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
+	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
+	autocmd FileType java,javascript vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("//")<cr>
+	autocmd FileType java,javascript vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("//")<cr>
 augroup END
 
 " Latex settings
