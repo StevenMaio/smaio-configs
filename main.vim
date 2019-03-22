@@ -132,7 +132,7 @@ function! MyRemoveWrapComment(commentOpen, commentEnd)
    for i in range(len(a:commentOpen) + 1)
       normal x
    endfor
-   execute "normal $"
+   execute "normal g_"
    for i in range(len(a:commentEnd) + 1)
       normal x
    endfor
