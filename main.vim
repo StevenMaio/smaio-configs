@@ -174,6 +174,8 @@ augroup END
 " Latex settings
 augroup filetype_latex
    autocmd FileType latex setlocal spell
+	autocmd FileType latex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
+	autocmd FileType latex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
 augroup END
 
 " HTML Settings
