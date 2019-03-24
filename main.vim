@@ -6,6 +6,18 @@ let g:user_emmet_leader_key='``' " Edit emmit leader key
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets"]
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " General settings
 set belloff=all
 set tabstop=4
@@ -132,7 +144,7 @@ function! MyRemoveWrapComment(commentOpen, commentEnd)
    for i in range(len(a:commentOpen) + 1)
       normal x
    endfor
-   execute "normal $"
+   execute "normal g_"
    for i in range(len(a:commentEnd) + 1)
       normal x
    endfor
