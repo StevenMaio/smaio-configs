@@ -1,3 +1,4 @@
+# LaTeX snippets
 snippet beg
 \begin{$1}
 $2
@@ -6,15 +7,15 @@ endsnippet
 
 # Snippets relating to integrals
 snippet int
-\int $1
+\int $1 d$2
 endsnippet
 
-snippet int_
-\int_{$1} $2
+snippet int-
+\int_{$1} d$2
 endsnippet
 
-snippet int_^
-\int_{$1}^{$2} $3
+snippet int-=
+\int_{$1}^{$2} $3 d$4
 endsnippet
 
 # Summation snippets
@@ -22,10 +23,61 @@ snippet sum
 \sum $1
 endsnippet
 
-snippet sum_
+snippet sum-
 \sum_{$1} $2
 endsnippet
 
-snippet sum_^
+snippet sum-=
 \sum_{$1}^{$2} $3
+endsnippet
+
+# Product snippets
+snippet prod
+\prod $1
+endsnippet
+
+# Product snippets
+snippet prod-
+\prod_{$1} $2
+endsnippet
+
+# Product snippets
+snippet prod-=
+\prod_{$1}^{$2} $3
+endsnippet
+
+# Limits
+snippet lim
+\lim_{$1 \to $2} $3
+endsnippet
+
+snippet limsup
+\limsup $1$
+endsnippet
+
+snippet limsup-
+\limsup\limits_{$1 \to $2} $3
+endsnippet
+
+snippet liminf
+\liminf $1
+endsnippet
+
+snippet liminf-
+\liminf\limits_{$1 \to $2} $3
+endsnippet
+
+# Fractions
+snippet frac
+\frac{$1}{$2} $3
+endsnippet
+
+# expand underscore
+snippet -
+_{$1} $2
+endsnippet
+
+#expand overscore +
+snippet +
+^{$1} $2
 endsnippet
