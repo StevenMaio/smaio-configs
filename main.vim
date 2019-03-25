@@ -151,6 +151,31 @@ function! MyRemoveWrapComment(commentOpen, commentEnd)
    execute "normal ".l:col_no."|"
 endfunction
 
+function! MyBlockWrapComment(commentOpen, commentEnd)
+    let l:line_no = getcurpos()[1]
+    let l:col_no = getcurpos()[2]
+    execute "normal '<I".a:commentOpen." "
+    execute "normal '>A ".a:commentEnd
+    execute "normal ".l:line_no."G"
+    execute "normal ".l:col_no."|"
+endfunction
+
+function! MyRemoveBlockWrapComment(commentOpen, commentEnd)
+   let l:line_no = getcurpos()[1]
+   let l:col_no = getcurpos()[2] - len(a:commentOpen)
+   " Remove the comment opener at the beginning
+   execute "normal '<^"
+   for i in range(len(a:commentOpen) + 1)
+      normal x
+   endfor
+   execute "normal '>g_"
+   for i in range(len(a:commentEnd) + 1)
+      normal x
+   endfor
+   execute "normal ".l:line_no."G"
+   execute "normal ".l:col_no."|"
+endfunction
+
 " Abbreviations
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
@@ -187,10 +212,14 @@ augroup filetype_html
 	autocmd FileType html setlocal expandtab
 	autocmd FileType html nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
 	autocmd FileType html nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
+	autocmd FileType html vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
+	autocmd FileType html vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
 augroup filetype_xml
    autocmd!
 	autocmd FileType xml nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
 	autocmd FileType xml nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
+	autocmd FileType xml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
+	autocmd FileType xml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
