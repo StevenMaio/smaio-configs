@@ -6,7 +6,6 @@ let g:user_emmet_leader_key='``' " Edit emmit leader key
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
-
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -23,6 +22,7 @@ set belloff=all
 set tabstop=4
 set sw=4
 set softtabstop=4
+set expandtab
 set number
 set foldenable
 set wildmenu
@@ -47,7 +47,10 @@ hi Visual guifg=#ffffff guibg=#000000 gui=none
 let mapleader = "-"
 let maplocalleader = "\\"
 
-" Macros
+""""""""""
+" Macros "
+""""""""""
+
 " Turns off the highlights on search results
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " returns to normal mode
@@ -63,8 +66,7 @@ nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>
 
 " Leader key macros
-
-" Quickl open my _vimrc
+" Quickly open my _vimrc
 noremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
 " Quickly source _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -180,6 +182,7 @@ endfunction
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
 
+" Python Settings
 augroup filetype_python
 	" Shortcut for adding pdb to code
 	autocmd FileType python nnoremap <silent> <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
@@ -189,6 +192,7 @@ augroup filetype_python
 	autocmd FileType python vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
 
+" Java and JavaScript (they're pretty similar)
 augroup filetype_java
 	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
 	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
@@ -201,6 +205,14 @@ augroup filetype_latex
    autocmd FileType latex setlocal spell
 	autocmd FileType latex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
 	autocmd FileType latex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
+	autocmd FileType latex vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
+	autocmd FileType latex vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
+augroup END
+
+" Plaintext settings
+augroup filetype_plaintext
+   autocmd FileType text setlocal nowrap
+   autocmd FileType text setlocal spell
 augroup END
 
 " HTML Settings
@@ -216,6 +228,7 @@ augroup filetype_html
 	autocmd FileType html vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
+" XML Settings
 augroup filetype_xml
    autocmd!
 	autocmd FileType xml nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
