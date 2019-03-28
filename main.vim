@@ -12,7 +12,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/Documents/Projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -202,11 +202,11 @@ augroup END
 
 " Latex settings
 augroup filetype_latex
-   autocmd FileType latex setlocal spell
-	autocmd FileType latex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
-	autocmd FileType latex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
-	autocmd FileType latex vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
-	autocmd FileType latex vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
+	autocmd FileType tex setlocal spell
+	autocmd FileType tex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
+	autocmd FileType tex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
+	autocmd FileType tex vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
+	autocmd FileType tex vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
 augroup END
 
 " Plaintext settings
