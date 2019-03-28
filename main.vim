@@ -17,7 +17,10 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysn
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" General settings
+""""""""""""""""""""
+" General Settings "
+""""""""""""""""""""
+
 set belloff=all
 set tabstop=4
 set sw=4
@@ -82,6 +85,10 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
 nnoremap <leader>nt :NERDTree<cr>
+
+"""""""""""""
+" Functions "
+"""""""""""""
 
 " This is the prototype for making comments
 function! MyAddComment(comment)
@@ -178,9 +185,16 @@ function! MyRemoveBlockWrapComment(commentOpen, commentEnd)
    execute "normal ".l:col_no."|"
 endfunction
 
-" Abbreviations
+"""""""""""""""""
+" Abbreviations "
+"""""""""""""""""
+
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
+
+"""""""""""""""""
+" File Settings "
+"""""""""""""""""
 
 " Python Settings
 augroup filetype_python
