@@ -100,7 +100,7 @@ endfunction
 function! MyRemoveComment(comment)
    let l:length = len(a:comment)
    let l:col_no = getcurpos()[2] - l:length
-   execute "normal 0"
+   execute "normal ^"
    for i in range(l:length)
       normal x
    endfor
