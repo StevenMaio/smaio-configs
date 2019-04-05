@@ -250,3 +250,8 @@ augroup filetype_xml
 	autocmd FileType xml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
 	autocmd FileType xml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
+
+" Add local settings if one exists in cwd
+if filereadable(".vimrc")
+   execute "source .vimrc"
+endif
