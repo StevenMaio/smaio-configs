@@ -1,11 +1,17 @@
 "  Steven Maio. These are my vim settings
 "
 "    Sections:
+"       _Plugin_Settings_
 "       _General_Settings_
 "       _Macros_
 "       _Functions_
 "       _Abbreviations_
 "       _File_Settings_
+"       _Other_
+
+"""""""""""""""""""""
+" _Plugin_Settings_ "
+"""""""""""""""""""""
 
 " NERDTre settings
 let NERDTreeIgnore = ['\.pyc$']  " use this to ignore files in NERDTree
@@ -273,6 +279,10 @@ augroup filetype_gitcommit
    " Add spell check to the file
 	autocmd FileType gitcommit setlocal spell
 augroup END
+
+"""""""""""
+" _Other_ "
+"""""""""""
 
 " Add local settings if one exists in cwd
 if filereadable(".vimrc")
