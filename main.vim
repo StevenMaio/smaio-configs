@@ -251,6 +251,20 @@ augroup filetype_xml
 	autocmd FileType xml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
+" YML Settings
+augroup filetype_yaml
+	autocmd FileType yaml nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
+	autocmd FileType yaml nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
+	autocmd FileType yaml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
+	autocmd FileType yaml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
+augroup END
+
+" gitcommit Settings
+augroup filetype_gitcommit
+   " Add spell check to the file
+	autocmd FileType gitcommit setlocal spell
+augroup END
+
 " Add local settings if one exists in cwd
 if filereadable(".vimrc")
    execute "source .vimrc"
