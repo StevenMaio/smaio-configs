@@ -1,3 +1,12 @@
+"  Steven Maio. These are my vim settings
+"
+"    Sections:
+"       _General_Settings_
+"       _Macros_
+"       _Functions_
+"       _Abbreviations_
+"       _File_Settings_
+
 " NERDTre settings
 let NERDTreeIgnore = ['\.pyc$']  " use this to ignore files in NERDTree
 
@@ -17,9 +26,9 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysn
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-""""""""""""""""""""
-" General Settings "
-""""""""""""""""""""
+""""""""""""""""""""""
+" _General_Settings_ "
+""""""""""""""""""""""
 
 set belloff=all
 set tabstop=4
@@ -50,9 +59,9 @@ hi Visual guifg=#ffffff guibg=#000000 gui=none
 let mapleader = "-"
 let maplocalleader = "\\"
 
-""""""""""
-" Macros "
-""""""""""
+""""""""""""
+" _Macros_ "
+""""""""""""
 
 " Turns off the highlights on search results
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
@@ -86,9 +95,9 @@ cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
 nnoremap <leader>nt :NERDTree<cr>
 
-"""""""""""""
-" Functions "
-"""""""""""""
+"""""""""""""""
+" _Functions_ "
+"""""""""""""""
 
 " This is the prototype for making comments
 function! MyAddComment(comment)
@@ -185,16 +194,16 @@ function! MyRemoveBlockWrapComment(commentOpen, commentEnd)
    execute "normal ".l:col_no."|"
 endfunction
 
-"""""""""""""""""
-" Abbreviations "
-"""""""""""""""""
+"""""""""""""""""""
+" _Abbreviations_ "
+"""""""""""""""""""
 
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
 
-"""""""""""""""""
-" File Settings "
-"""""""""""""""""
+"""""""""""""""""""
+" _File_Settings_ "
+"""""""""""""""""""
 
 " Python Settings
 augroup filetype_python
