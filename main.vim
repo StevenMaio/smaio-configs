@@ -65,6 +65,9 @@ hi Visual guifg=#ffffff guibg=#000000 gui=none
 let mapleader = "-"
 let maplocalleader = "\\"
 
+" grep ignore
+set wildignore +=**.pyc
+
 """"""""""""
 " _Macros_ "
 """"""""""""
