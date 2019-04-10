@@ -59,7 +59,7 @@ syntax on
 
 " Search settings
 hi Search guibg=LightBlue
-hi Visual guifg=#ffffff guibg=#000000 gui=none
+hi Visual guifg=#000000 guibg=#ffffff gui=none
  
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
@@ -276,6 +276,15 @@ augroup filetype_yaml
 	autocmd FileType yaml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
 	autocmd FileType yaml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
+
+" Matlab Settings
+augroup filetype_matlab
+	autocmd FileType matlab nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
+	autocmd FileType matlab nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
+	autocmd FileType matlab vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
+	autocmd FileType matlab vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
+augroup END
+
 
 " gitcommit Settings
 augroup filetype_gitcommit
