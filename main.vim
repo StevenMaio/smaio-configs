@@ -55,6 +55,7 @@ set ignorecase
 set smartcase
 set foldmethod=marker
 set hlsearch
+set scroll=5
 syntax on
 
 " Search settings
@@ -77,14 +78,6 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " returns to normal mode
 inoremap jk <esc>h
 inoremap JK <esc>h
-" capitalizes the current word
-inoremap <c-u> <esc>viwU<esc>ea
-" capitalizes the current word
-nnoremap <c-u> viwU<esc>e
-" Makes <c-e> move sligthly faster
-nnoremap <c-e> 5<c-e>
-" Makes <c-e> move sligthly faster
-nnoremap <c-y> 5<c-y>
 
 " Leader key macros
 " Quickly open my _vimrc
