@@ -59,7 +59,7 @@ set scroll=5
 syntax on
 
 " Search settings
-hi Search guibg=LightBlue
+hi Search guibg=LightBlue guifg=#ffffff
 hi Visual guifg=#000000 guibg=#ffffff gui=none
  
 " Set leader key (type <leader> to use it)
@@ -76,8 +76,8 @@ set wildignore +=**.pyc
 " Turns off the highlights on search results
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " returns to normal mode
-inoremap jk <esc>h
-inoremap JK <esc>h
+inoremap jk <esc>
+inoremap JK <esc>
 
 " Leader key macros
 " Quickly open my _vimrc
@@ -96,6 +96,8 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
 nnoremap <leader>nt :NERDTree<cr>
+" capitalizes the current word
+inoremap <c-u> <esc>viwU<esc>ea
 
 """""""""""""""
 " _Functions_ "
