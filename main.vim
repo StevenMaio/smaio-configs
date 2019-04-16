@@ -56,6 +56,7 @@ set smartcase
 set foldmethod=marker
 set hlsearch
 set scroll=5
+set splitbelow
 syntax on
 
 " Search settings
@@ -81,7 +82,7 @@ inoremap JK <esc>
 
 " Leader key macros
 " Quickly open my _vimrc
-noremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
+nnoremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
 " Quickly source _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " Toggle smart case
@@ -96,8 +97,19 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
 nnoremap <leader>nt :NERDTree<cr>
-" capitalizes the current word
+" capitalizes the current word (only works in insert mode)
 inoremap <c-u> <esc>viwU<esc>ea
+" have c-e move faster
+nnoremap <c-e> 5<c-e>
+" have c-y move faster
+nnoremap <c-y> 5<c-y>
+
+" opens terminal below and sets the vertical height to be 10 lines
+nnoremap <leader>t :terminal <cr><c-W>k:execute "resize ".(&lines - 10)<cr><c-W>j
+
+" macro to start terminal if windows is running
+if has("win32")
+endif
 
 """""""""""""""
 " _Functions_ "
@@ -248,7 +260,6 @@ augroup filetype_html
 	autocmd FileType html setlocal tabstop=2
 	autocmd FileType html setlocal softtabstop=2
 	autocmd FileType html setlocal sw=2
-	autocmd FileType html setlocal expandtab
 	autocmd FileType html nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
 	autocmd FileType html nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
 	autocmd FileType html vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
