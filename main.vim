@@ -105,8 +105,8 @@ nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>
 
 " opens terminal below and sets the vertical height to be 10 lines
-" FIXME: this only works if the window has the entire column to itself. 
-nnoremap <leader>t :terminal <cr><c-W>k:execute "resize ".(&lines - 10)<cr><c-W>j
+" I'm sorry for the really long expression :(
+nnoremap <leader>t :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr><c-W>j
 
 " macro to start terminal if windows is running
 if has("win32")
