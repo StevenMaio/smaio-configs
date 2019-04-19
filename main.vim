@@ -302,8 +302,3 @@ augroup END
 """""""""""
 " _Other_ "
 """""""""""
-
-" Add local settings if one exists in cwd
-if filereadable(".vimrc")
-   execute "source .vimrc"
-endif
