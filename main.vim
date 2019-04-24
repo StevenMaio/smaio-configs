@@ -27,7 +27,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/documents/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -86,6 +86,8 @@ inoremap JK <esc>
 nnoremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
 " Quickly source _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
+" Source the currently file
+nnoremap <leader>ss :source %<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
 " wraps the current word in double quotes
@@ -100,10 +102,14 @@ cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 nnoremap <leader>nt :NERDTree<cr>
 " capitalizes the current word (only works in insert mode)
 inoremap <c-u> <esc>viwU<esc>ea
-" have c-e move faster
+" have c-e move faster in normal mode
 nnoremap <c-e> 5<c-e>
-" have c-y move faster
+" have c-y move faster in normal mode
 nnoremap <c-y> 5<c-y>
+" have c-e move faster in visual mode
+vnoremap <c-e> 5<c-e>
+" have c-y move faster in visual mode
+vnoremap <c-y> 5<c-y>
 
 " opens terminal below and sets the vertical height to be 10 lines
 " I'm sorry for the really long expression :(
