@@ -86,8 +86,10 @@ inoremap JK <esc>
 nnoremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
 " Quickly source _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
-" Source the currently file
-nnoremap <leader>ss :source %<cr>
+" Source the script.vim at root
+nnoremap <leader>ss :call MySourceScriptDotVim()<cr>
+" Source current file
+nnoremap <leader>so :source %<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
 " wraps the current word in double quotes
@@ -123,6 +125,12 @@ endif
 " _Functions_ "
 """""""""""""""
 
+function! MySourceScriptDotVim()
+   if filereadable("script.vim")
+      execute "source script.vim"
+   endif
+endfunction
+
 " This is the prototype for making comments
 function! MyAddComment(comment)
    let l:col_no = getcurpos()[2] + len(a:comment)
@@ -151,7 +159,7 @@ function! MyBlockComment(comment)
     if l:last_line_no == l:first_line_no
         call MyAddComment(a:comment)
     else
-        execute ":'<,'>call MyAddComment(\"".a:comment."\")"
+        execute ":'<,'>call MyAddComment('".a:comment."')"
     endif
 endfunction
 
@@ -166,7 +174,7 @@ function! MyRemoveBlockComment(comment)
     if l:last_line_no == l:first_line_no
         call MyAddComment(a:comment)
     else
-        execute ":'<,'>call MyRemoveComment(\"".a:comment."\")"
+        execute ":'<,'>call MyRemoveComment('".a:comment."')"
     endif
     execute "normal ".l:line_no."G"
     execute "normal ".l:col_no."|"
@@ -299,6 +307,13 @@ augroup filetype_matlab
 	autocmd FileType matlab vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
 augroup END
 
+" Java and JavaScript (they're pretty similar)
+augroup filetype_vim
+	autocmd FileType vim nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment('" ')<cr>
+	autocmd FileType vim nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment('" ')<cr>
+	autocmd FileType vim vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment('" ')<cr>
+	autocmd FileType vim vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment('" ')<cr>
+augroup END
 
 " gitcommit Settings
 augroup filetype_gitcommit
