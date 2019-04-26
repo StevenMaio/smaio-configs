@@ -127,6 +127,27 @@ endif
 " _Functions_ "
 """""""""""""""
 
+" Creates a directory of vim scripts and creates a new vim script
+" indexed from 0
+function! MyCreateVimScripts()
+   if isdirectory("vim_scripts") == 0
+      call mkdir("vim_scripts")
+      echo "Making vim_scripts directory"
+   endif
+
+   let i = 0
+   let filename = ""
+   while i < 5
+      let filename = "vim_scripts/vim_".i.".vim"
+      if filereadable(filename) == 0
+         break
+      endif
+      let i += 1
+   endwhile
+   " Open the new file for editing
+   execute "edit ".filename
+endfunction
+
 function! MySourceScriptDotVim()
    if filereadable("script.vim")
       execute "source script.vim"
