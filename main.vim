@@ -305,6 +305,18 @@ augroup filetype_html
 	autocmd FileType html vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
+" Pug Settings
+augroup filetype_pug
+	autocmd!
+	autocmd FileType pug setlocal tabstop=2
+	autocmd FileType pug setlocal softtabstop=2
+	autocmd FileType pug setlocal sw=2
+	autocmd FileType pug nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
+	autocmd FileType pug nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
+	autocmd FileType pug vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
+	autocmd FileType pug vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
+augroup END
+
 " XML Settings
 augroup filetype_xml
    autocmd!
