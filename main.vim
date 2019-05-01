@@ -58,6 +58,7 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
+set cursorline cursorcolumn
 syntax on
 
 " Search settings
@@ -134,11 +135,10 @@ function! MyCreateVimScripts()
       call mkdir("vim_scripts")
       echo "Making vim_scripts directory"
    endif
-
    let i = 0
    let filename = ""
    while i < 5
-      let filename = "vim_scripts/vim_".i.".vim"
+      let filename = "vim_scripts/script_".i.".vim"
       if filereadable(filename) == 0
          break
       endif
