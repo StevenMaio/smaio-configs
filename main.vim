@@ -27,7 +27,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/documents/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -118,7 +118,7 @@ vnoremap <c-y> 5<c-y>
 " I'm sorry for the really long expression :(
 nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
 " Opens a small split window for script.vim
-nnoremap <leader>os :split<cr>:e script.vim<cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
+nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 
 " macro to start terminal if windows is running
 if has("win32")
