@@ -58,6 +58,7 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
+set cursorline cursorcolumn
 syntax on
 
 " Search settings
@@ -117,7 +118,7 @@ vnoremap <c-y> 5<c-y>
 " I'm sorry for the really long expression :(
 nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
 " Opens a small split window for script.vim
-nnoremap <leader>os :split<cr>:e script.vim<cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
+nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 
 " macro to start terminal if windows is running
 if has("win32")
@@ -126,6 +127,26 @@ endif
 """""""""""""""
 " _Functions_ "
 """""""""""""""
+
+" Creates a directory of vim scripts and creates a new vim script
+" indexed from 0
+function! MyCreateVimScripts()
+   if isdirectory("vim_scripts") == 0
+      call mkdir("vim_scripts")
+      echo "Making vim_scripts directory"
+   endif
+   let i = 0
+   let filename = ""
+   while i < 5
+      let filename = "vim_scripts/script_".i.".vim"
+      if filereadable(filename) == 0
+         break
+      endif
+      let i += 1
+   endwhile
+   " Open the new file for editing
+   execute "edit ".filename
+endfunction
 
 function! MySourceScriptDotVim()
    if filereadable("script.vim")
