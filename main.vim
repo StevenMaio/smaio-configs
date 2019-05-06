@@ -135,13 +135,13 @@ endif
 " Creates a side window and syncs up the cursors and scrolling
 function! MyCreateSyncedWindow()
    vertical split
-   setlocal cursorbind
-   setlocal scrollbind
-   setlocal nonumber
+   set cursorbind
+   set scrollbind
+   set nonumber
    vertical resize 15
    wincmd h
-   setlocal cursorbind
-   setlocal scrollbind
+   set cursorbind
+   set scrollbind
 endfunction
 
 " Creates a directory of vim scripts and creates a new vim script
