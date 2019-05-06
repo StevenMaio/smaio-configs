@@ -93,7 +93,11 @@ nnoremap <leader>ss :call MySourceScriptDotVim()<cr>
 nnoremap <leader>so :source %<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
-" wraps the current word in double quotes
+" wraps the current word in whatever ` is
+nnoremap <leader>` viw<esc>a`<esc>bi`<esc>lel
+" wraps the selected block in double quotes
+vnoremap <leader>` <esc>`<i`<esc>`>la`<esc>
+" wraps the current word in single quotes
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 " wraps the current word in single quotes
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
@@ -102,7 +106,7 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 " wraps the selected block in single quotes
 cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
-nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTree<cr>:set number<cr>
 " capitalizes the current word (only works in insert mode)
 inoremap <c-u> <esc>viwU<esc>ea
 " have c-e move faster in normal mode
@@ -127,6 +131,18 @@ endif
 """""""""""""""
 " _Functions_ "
 """""""""""""""
+
+" Creates a side window and syncs up the cursors and scrolling
+function! MyCreateSyncedWindow()
+   vertical split
+   setlocal cursorbind
+   setlocal scrollbind
+   setlocal nonumber
+   vertical resize 15
+   wincmd h
+   setlocal cursorbind
+   setlocal scrollbind
+endfunction
 
 " Creates a directory of vim scripts and creates a new vim script
 " indexed from 0
