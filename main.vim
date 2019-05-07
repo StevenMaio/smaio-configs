@@ -1,5 +1,3 @@
-"  Steven Maio. These are my vim settings
-"
 "    Sections:
 "       _Plugin_Settings_
 "       _General_Settings_
@@ -134,14 +132,18 @@ endif
 
 " Creates a side window and syncs up the cursors and scrolling
 function! MyCreateSyncedWindow()
-   vertical split
-   set cursorbind
-   set scrollbind
-   set nonumber
-   vertical resize 15
+   wincmd l
+   setlocal cursorbind
+   setlocal scrollbind
+   setlocal nonumber
+   setlocal nocursorcolumn
+   " Set new commands for the buffer?
+"   inoremap <silent> <buffer> <ENTER> <ENTER><esc><c-w>lki<ENTER><esc><c-w>hi
+   vertical resize 20
    wincmd h
-   set cursorbind
-   set scrollbind
+   setlocal cursorbind
+   setlocal nocursorcolumn
+   setlocal scrollbind
 endfunction
 
 " Creates a directory of vim scripts and creates a new vim script
