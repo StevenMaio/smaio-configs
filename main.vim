@@ -12,7 +12,7 @@
 """""""""""""""""""""
 
 " NERDTre settings
-let NERDTreeIgnore = ['\.pyc$']  " use this to ignore files in NERDTree
+let NERDTreeIgnore = ['\.pyc$', '\.png$']  " use this to ignore files in NERDTree
 
 " Emmit configuration settings
 let g:user_emmet_leader_key='``' " Edit emmit leader key
@@ -56,8 +56,15 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
-set cursorline cursorcolumn
+set cursorline
 syntax on
+
+" GUI specific settings
+if has("gui_running")
+    set cursorcolumn
+    colorscheme desert
+    set guioptions-=Tm
+endif
 
 " Search settings
 hi Search guibg=LightBlue guifg=#ffffff
