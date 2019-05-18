@@ -25,7 +25,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/Documents/Projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -45,7 +45,6 @@ set wildmenu
 set showmatch
 set autoindent
 set backspace=indent,eol,start
-set cursorline
 set ruler
 set incsearch
 set showcmd
@@ -56,14 +55,17 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
-set cursorline
 syntax on
 
 " GUI specific settings
 if has("gui_running")
+    set cursorline
     set cursorcolumn
     colorscheme desert
     set guioptions-=Tm
+else
+    set nocursorline
+    set nocursorcolumn
 endif
 
 " Search settings
@@ -303,6 +305,13 @@ augroup filetype_java
 	autocmd FileType java,javascript vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("//")<cr>
 augroup END
 
+augroup filetype_c
+	autocmd FileType c,cpp nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
+	autocmd FileType c,cpp nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
+	autocmd FileType c,cpp vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("//")<cr>
+	autocmd FileType c,cpp vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("//")<cr>
+augroup END
+
 " Latex settings
 augroup filetype_latex
 	autocmd FileType tex setlocal spell
@@ -379,6 +388,10 @@ augroup END
 augroup filetype_gitcommit
    " Add spell check to the file
 	autocmd FileType gitcommit setlocal spell
+augroup END
+
+" Markdown files
+augroup filetype_markdown
 augroup END
 
 """""""""""

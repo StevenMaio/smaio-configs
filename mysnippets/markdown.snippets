@@ -1,0 +1,111 @@
+# LaTeX snippets
+
+snippet math "Creates a basic math environment"
+\$ $1 \$$0
+endsnippet
+
+snippet begin "begin{} / end{}" b
+\begin{$1}
+$2
+\end{$1}
+$0
+endsnippet
+
+# Snippets relating to integrals
+snippet "(i+)nt" "Creates an integral" r
+\\`!p snip.rv = match.group(1)`nt $1 \; d$0
+endsnippet
+
+snippet "(i+)nt-" "Creates an integral with a lower bound" r 
+\\`!p snip.rv = match.group(1)`nt_{$1} $2 \; d$0
+endsnippet
+
+snippet "(i+)nt-=" "Creates an integral with a lower bound and upper bound" r
+\\`!p snip.rv = match.group(1)`nt_{$1}^{$2} $3 \; d$0
+endsnippet
+
+# Summation snippets
+snippet sum
+\sum $0
+endsnippet
+
+snippet sum-
+\sum_{$1} $0
+endsnippet
+
+snippet sum-=
+\sum_{$1}^{$2} $0
+endsnippet
+
+# Product snippets
+snippet prod
+\prod $0
+endsnippet
+
+# Product snippets
+snippet prod-
+\prod_{$1} $0
+endsnippet
+
+# Product snippets
+snippet prod-=
+\prod_{$1}^{$2}$0
+endsnippet
+
+# Limits
+snippet lim
+\lim_{$1 \to $2}$0
+endsnippet
+
+snippet limsup
+\limsup $1$
+endsnippet
+
+snippet limsup-
+\limsup\limits_{$1 \to $2}$0
+endsnippet
+
+snippet liminf
+\liminf $0
+endsnippet
+
+snippet liminf-
+\liminf\limits_{$1 \to $2}$0
+endsnippet
+
+# Fractions
+snippet frac
+\frac{$1}{$2}$0
+endsnippet
+
+# expand underscore
+snippet -
+_{$1} $0
+endsnippet
+
+#expand overscore +
+snippet +
+^{$1} $0
+endsnippet
+
+# function macro
+snippet fun
+$1 : $2 \to $0
+endsnippet
+
+snippet "bb(\w+)" "auto blackboard bold" r
+\\mathbb{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet "cal(\w+)" "auto math caligraphy" r
+\\mathcal{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+snippet sec "creates a new section"
+\\section{$1}
+$0
+endsnippet
+
+snippet set "Creates a set in LaTeX math"
+\\{ $1 \; : \; $2 \\}$0
+endsnippet
