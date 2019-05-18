@@ -1,5 +1,3 @@
-"  Steven Maio. These are my vim settings
-"
 "    Sections:
 "       _Plugin_Settings_
 "       _General_Settings_
@@ -14,7 +12,7 @@
 """""""""""""""""""""
 
 " NERDTre settings
-let NERDTreeIgnore = ['\.pyc$']  " use this to ignore files in NERDTree
+let NERDTreeIgnore = ['\.pyc$', '\.png$']  " use this to ignore files in NERDTree
 
 " Emmit configuration settings
 let g:user_emmet_leader_key='``' " Edit emmit leader key
@@ -27,7 +25,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/Documents/Projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -58,7 +56,15 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
+set cursorline
 syntax on
+
+" GUI specific settings
+if has("gui_running")
+    set cursorcolumn
+    colorscheme desert
+    set guioptions-=Tm
+endif
 
 " Search settings
 hi Search guibg=LightBlue guifg=#ffffff
@@ -92,7 +98,11 @@ nnoremap <leader>ss :call MySourceScriptDotVim()<cr>
 nnoremap <leader>so :source %<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
-" wraps the current word in double quotes
+" wraps the current word in whatever ` is
+nnoremap <leader>` viw<esc>a`<esc>bi`<esc>lel
+" wraps the selected block in double quotes
+vnoremap <leader>` <esc>`<i`<esc>`>la`<esc>
+" wraps the current word in single quotes
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 " wraps the current word in single quotes
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
@@ -101,7 +111,7 @@ vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 " wraps the selected block in single quotes
 cnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 " Open Nerd Tree
-nnoremap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTree<cr>:set number<cr>
 " capitalizes the current word (only works in insert mode)
 inoremap <c-u> <esc>viwU<esc>ea
 " have c-e move faster in normal mode
@@ -127,6 +137,22 @@ endif
 " _Functions_ "
 """""""""""""""
 
+" Creates a side window and syncs up the cursors and scrolling
+function! MyCreateSyncedWindow()
+   wincmd l
+   setlocal cursorbind
+   setlocal scrollbind
+   setlocal nonumber
+   setlocal nocursorcolumn
+   " Set new commands for the buffer?
+"   inoremap <silent> <buffer> <ENTER> <ENTER><esc><c-w>lki<ENTER><esc><c-w>hi
+   vertical resize 20
+   wincmd h
+   setlocal cursorbind
+   setlocal nocursorcolumn
+   setlocal scrollbind
+endfunction
+
 " Creates a directory of vim scripts and creates a new vim script
 " indexed from 0
 function! MyCreateVimScripts()
@@ -134,11 +160,10 @@ function! MyCreateVimScripts()
       call mkdir("vim_scripts")
       echo "Making vim_scripts directory"
    endif
-
    let i = 0
    let filename = ""
    while i < 5
-      let filename = "vim_scripts/vim_".i.".vim"
+      let filename = "vim_scripts/script_".i.".vim"
       if filereadable(filename) == 0
          break
       endif
