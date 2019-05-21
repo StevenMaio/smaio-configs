@@ -376,7 +376,7 @@ augroup filetype_matlab
 	autocmd FileType matlab vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
 augroup END
 
-" Java and JavaScript (they're pretty similar)
+" vim settings
 augroup filetype_vim
 	autocmd FileType vim nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment('" ')<cr>
 	autocmd FileType vim nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment('" ')<cr>
