@@ -65,6 +65,7 @@ if has("gui_running")
     set guioptions-=Tm
 else
     set nocursorline
+    colorscheme elflord
     set nocursorcolumn
 endif
 
