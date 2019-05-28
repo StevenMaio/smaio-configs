@@ -96,6 +96,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ss :call MySourceScriptDotVim()<cr>
 " Source current file
 nnoremap <leader>so :source %<cr>
+" quickly closes the current tab
+nnoremap <leader>tc :tabclose<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
 " wraps the current word in whatever ` is
