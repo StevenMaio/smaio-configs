@@ -134,8 +134,10 @@ nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_get
 " Opens a small split window for script.vim
 nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 
-" macro to start terminal if windows is running
+" Windows specific settings
 if has("win32")
+   set shell=powershell
+   set shellcmdflag=-command
 endif
 
 """""""""""""""
@@ -187,26 +189,26 @@ endfunction
 " This is the prototype for making comments
 function! MyAddComment(comment)
    let l:col_no = getcurpos()[2] + len(a:comment)
-   execute "normal 0i".a:comment
-   execute "normal ".l:col_no."|"
+   execute "normal! 0i".a:comment
+   execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyRemoveComment(comment)
    let l:length = len(a:comment)
    let l:col_no = getcurpos()[2] - l:length
-   execute "normal ^"
+   execute "normal! ^"
    for i in range(l:length)
-      normal x
+      normal! x
    endfor
-   execute "normal ".l:col_no."|"
+   execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyBlockComment(comment)
     let l:line_no = getcurpos()[1]
     let l:col_no = getcurpos()[2]
-    execute "normal '<"
+    execute "normal! '<"
     let l:first_line_no = getcurpos()[1]
-    execute "normal '>"
+    execute "normal! '>"
     let l:last_line_no = getcurpos()[1]
     echom l:first_line_no.",".l:last_line_no
     if l:last_line_no == l:first_line_no
@@ -219,9 +221,9 @@ endfunction
 function! MyRemoveBlockComment(comment)
     let l:line_no = getcurpos()[1]
     let l:col_no = getcurpos()[2]
-    execute "normal '<"
+    execute "normal! '<"
     let l:first_line_no = getcurpos()[1]
-    execute "normal '>"
+    execute "normal! '>"
     let l:last_line_no = getcurpos()[1]
     echom l:first_line_no.",".l:last_line_no
     if l:last_line_no == l:first_line_no
@@ -229,54 +231,54 @@ function! MyRemoveBlockComment(comment)
     else
         execute ":'<,'>call MyRemoveComment('".a:comment."')"
     endif
-    execute "normal ".l:line_no."G"
-    execute "normal ".l:col_no."|"
+    execute "normal! ".l:line_no."G"
+    execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyWrapComment(commentOpen, commentEnd)
    let l:col_no = getcurpos()[2] + len(a:commentOpen)
-   execute "normal I".a:commentOpen." "
-   execute "normal A ".a:commentEnd
-   execute "normal ".l:col_no."|"
+   execute "normal! I".a:commentOpen." "
+   execute "normal! A ".a:commentEnd
+   execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyRemoveWrapComment(commentOpen, commentEnd)
    let l:col_no = getcurpos()[2] - len(a:commentOpen)
    " Remove the comment opener at the beginning
-   execute "normal ^"
+   execute "normal! ^"
    for i in range(len(a:commentOpen) + 1)
-      normal x
+      normal! x
    endfor
-   execute "normal g_"
+   execute "normal! g_"
    for i in range(len(a:commentEnd) + 1)
-      normal x
+      normal! x
    endfor
-   execute "normal ".l:col_no."|"
+   execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyBlockWrapComment(commentOpen, commentEnd)
     let l:line_no = getcurpos()[1]
     let l:col_no = getcurpos()[2]
-    execute "normal '<I".a:commentOpen." "
-    execute "normal '>A ".a:commentEnd
-    execute "normal ".l:line_no."G"
-    execute "normal ".l:col_no."|"
+    execute "normal! '<I".a:commentOpen." "
+    execute "normal! '>A ".a:commentEnd
+    execute "normal! ".l:line_no."G"
+    execute "normal! ".l:col_no."|"
 endfunction
 
 function! MyRemoveBlockWrapComment(commentOpen, commentEnd)
    let l:line_no = getcurpos()[1]
    let l:col_no = getcurpos()[2] - len(a:commentOpen)
    " Remove the comment opener at the beginning
-   execute "normal '<^"
+   execute "normal! '<^"
    for i in range(len(a:commentOpen) + 1)
-      normal x
+      normal! x
    endfor
-   execute "normal '>g_"
+   execute "normal! '>g_"
    for i in range(len(a:commentEnd) + 1)
-      normal x
+      normal! x
    endfor
-   execute "normal ".l:line_no."G"
-   execute "normal ".l:col_no."|"
+   execute "normal! ".l:line_no."G"
+   execute "normal! ".l:col_no."|"
 endfunction
 
 """""""""""""""""""
