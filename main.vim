@@ -35,9 +35,9 @@ let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""
 
 set belloff=all
-set tabstop=4
-set sw=4
-set softtabstop=4
+set tabstop=3
+set sw=3
+set softtabstop=3
 set expandtab
 set number
 set foldenable
@@ -135,8 +135,6 @@ nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr>
 vnoremap <leader>c "+y
 " paste the system clipboard in insert mode
 inoremap <leader>v <esc>"+gPa
-" paste the system clipboard in insert mode
-nnoremap <leader>v <esc>"+gPl
 
 " Windows specific settings
 if has("win32")
