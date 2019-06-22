@@ -125,14 +125,18 @@ nnoremap <c-e> 5<c-e>
 nnoremap <c-y> 5<c-y>
 " have c-e move faster in visual mode
 vnoremap <c-e> 5<c-e>
-" have c-y move faster in visual mode
-vnoremap <c-y> 5<c-y>
 
 " opens terminal below and sets the vertical height to be 10 lines
 " I'm sorry for the really long expression :(
 nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
 " Opens a small split window for script.vim
 nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
+" copy the current selection to the system clipboard
+vnoremap <leader>c "+y
+" paste the system clipboard in insert mode
+inoremap <leader>v <esc>"+gPa
+" paste the system clipboard in insert mode
+nnoremap <leader>v <esc>"+gPl
 
 " Windows specific settings
 if has("win32")
