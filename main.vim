@@ -25,7 +25,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."Documents/Projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -133,10 +133,6 @@ nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_get
 nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 " copy the current selection to the system clipboard
 vnoremap <leader>c "+y
-" paste the system clipboard in insert mode
-inoremap <leader>v <esc>"+gPa
-" paste the system clipboard in insert mode
-nnoremap <leader>v <esc>"+gPl
 
 " Windows specific settings
 if has("win32")
