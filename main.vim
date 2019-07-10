@@ -69,9 +69,12 @@ else
     set nocursorcolumn
 endif
 
-" Search settings
-hi Search guibg=LightBlue guifg=#ffffff
-hi Visual guifg=#000000 guibg=#ffffff gui=none
+" Highlight settings
+hi Cursor guifg=white guibg=black
+hi Search guibg=LightBlue guifg=#ffffff ctermbg=yellow ctermfg=black
+hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
+hi CursorLine cterm=None ctermbg=red
+hi CursorColumn ctermbg=red
  
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
