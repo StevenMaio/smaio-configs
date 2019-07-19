@@ -11,6 +11,8 @@
 " _Plugin_Settings_ "
 """""""""""""""""""""
 
+let g:netrw_list_hide = '.*\.swp$'
+
 " NERDTre settings
 let NERDTreeIgnore = ['\.pyc$', '\.png$']  " use this to ignore files in NERDTree
 
