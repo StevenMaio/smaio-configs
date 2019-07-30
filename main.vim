@@ -57,26 +57,16 @@ set hlsearch
 set scroll=5
 set splitbelow
 set splitright
+set wrap
+set linebreak
 syntax on
-
-" GUI specific settings
-if has("gui_running")
-    set cursorline
-    set cursorcolumn
-    colorscheme desert
-    set guioptions-=Tm
-else
-    set nocursorline
-    colorscheme elflord
-    set nocursorcolumn
-endif
 
 " Highlight settings
 hi Cursor guifg=white guibg=black
 hi Search guibg=LightBlue guifg=#ffffff ctermbg=yellow ctermfg=black
 hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
-hi CursorLine cterm=None ctermbg=red
-hi CursorColumn ctermbg=red
+hi CursorLine cterm=None ctermbg=blue
+hi CursorColumn ctermbg=blue
  
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
@@ -141,7 +131,6 @@ vnoremap <leader>c "+y
 
 " Windows specific settings
 if has("win32")
-   set shell=powershell
    set shellcmdflag=-command
 endif
 
