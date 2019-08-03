@@ -37,9 +37,9 @@ let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""
 
 set belloff=all
-set tabstop=3
-set sw=3
-set softtabstop=3
+set tabstop=4
+set sw=4
+set softtabstop=4
 set expandtab
 set number
 set foldenable
