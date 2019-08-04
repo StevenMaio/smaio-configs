@@ -27,7 +27,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."Documents/Projects/smaio-vim/mysnippets/"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , "/home/stevenmaio/Documents/projects/smaio-vim/mysnippets/"]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -313,7 +313,6 @@ augroup END
 
 " Latex settings
 augroup filetype_latex
-	autocmd FileType tex setlocal spell
 	autocmd FileType tex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
 	autocmd FileType tex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
 	autocmd FileType tex vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
@@ -323,7 +322,6 @@ augroup END
 " Plaintext settings
 augroup filetype_plaintext
    autocmd FileType text setlocal nowrap
-   autocmd FileType text setlocal spell
 augroup END
 
 " HTML Settings
@@ -385,8 +383,7 @@ augroup END
 
 " gitcommit Settings
 augroup filetype_gitcommit
-   " Add spell check to the file
-	autocmd FileType gitcommit setlocal spell
+   " NOTE: Nothing is really going on here
 augroup END
 
 " Markdown files
