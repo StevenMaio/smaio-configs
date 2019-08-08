@@ -6,3 +6,4 @@
 
 cp main.vim ~/.vimrc
 cp tmux.conf ~/.tmux.conf
+cp zathurarc ~/.config/zathura/zathurarc
