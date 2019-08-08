@@ -205,101 +205,6 @@ function! MySourceScriptDotVim()
    endif
 endfunction
 
-" This is the prototype for making comments
-function! MyAddComment(comment)
-   let l:col_no = getcurpos()[2] + len(a:comment)
-   execute "normal! 0i".a:comment
-   execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyRemoveComment(comment)
-   let l:length = len(a:comment)
-   let l:col_no = getcurpos()[2] - l:length
-   execute "normal! ^"
-   for i in range(l:length)
-      normal! x
-   endfor
-   execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyBlockComment(comment)
-    let l:line_no = getcurpos()[1]
-    let l:col_no = getcurpos()[2]
-    execute "normal! '<"
-    let l:first_line_no = getcurpos()[1]
-    execute "normal! '>"
-    let l:last_line_no = getcurpos()[1]
-    echom l:first_line_no.",".l:last_line_no
-    if l:last_line_no == l:first_line_no
-        call MyAddComment(a:comment)
-    else
-        execute ":'<,'>call MyAddComment('".a:comment."')"
-    endif
-endfunction
-
-function! MyRemoveBlockComment(comment)
-    let l:line_no = getcurpos()[1]
-    let l:col_no = getcurpos()[2]
-    execute "normal! '<"
-    let l:first_line_no = getcurpos()[1]
-    execute "normal! '>"
-    let l:last_line_no = getcurpos()[1]
-    echom l:first_line_no.",".l:last_line_no
-    if l:last_line_no == l:first_line_no
-        call MyAddComment(a:comment)
-    else
-        execute ":'<,'>call MyRemoveComment('".a:comment."')"
-    endif
-    execute "normal! ".l:line_no."G"
-    execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyWrapComment(commentOpen, commentEnd)
-   let l:col_no = getcurpos()[2] + len(a:commentOpen)
-   execute "normal! I".a:commentOpen." "
-   execute "normal! A ".a:commentEnd
-   execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyRemoveWrapComment(commentOpen, commentEnd)
-   let l:col_no = getcurpos()[2] - len(a:commentOpen)
-   " Remove the comment opener at the beginning
-   execute "normal! ^"
-   for i in range(len(a:commentOpen) + 1)
-      normal! x
-   endfor
-   execute "normal! g_"
-   for i in range(len(a:commentEnd) + 1)
-      normal! x
-   endfor
-   execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyBlockWrapComment(commentOpen, commentEnd)
-    let l:line_no = getcurpos()[1]
-    let l:col_no = getcurpos()[2]
-    execute "normal! '<I".a:commentOpen." "
-    execute "normal! '>A ".a:commentEnd
-    execute "normal! ".l:line_no."G"
-    execute "normal! ".l:col_no."|"
-endfunction
-
-function! MyRemoveBlockWrapComment(commentOpen, commentEnd)
-   let l:line_no = getcurpos()[1]
-   let l:col_no = getcurpos()[2] - len(a:commentOpen)
-   " Remove the comment opener at the beginning
-   execute "normal! '<^"
-   for i in range(len(a:commentOpen) + 1)
-      normal! x
-   endfor
-   execute "normal! '>g_"
-   for i in range(len(a:commentEnd) + 1)
-      normal! x
-   endfor
-   execute "normal! ".l:line_no."G"
-   execute "normal! ".l:col_no."|"
-endfunction
-
 """""""""""""""""""
 " _Abbreviations_ "
 """""""""""""""""""
@@ -315,38 +220,21 @@ iabbrev adn and
 augroup filetype_python
 	" Shortcut for adding pdb to code
 	autocmd FileType python nnoremap <silent> <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
-	autocmd FileType python nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
-	autocmd FileType python nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
-	autocmd FileType python vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
-	autocmd FileType python vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
 
 " Java and JavaScript (they're pretty similar)
 augroup filetype_java
-	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
-	autocmd FileType java,javascript nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
-	autocmd FileType java,javascript vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("//")<cr>
-	autocmd FileType java,javascript vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("//")<cr>
 augroup END
 
 augroup filetype_c
-	autocmd FileType c,cpp nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("//")<cr>
-	autocmd FileType c,cpp nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("//")<cr>
-	autocmd FileType c,cpp vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("//")<cr>
-	autocmd FileType c,cpp vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("//")<cr>
 augroup END
 
 " Latex settings
 augroup filetype_latex
-	autocmd FileType tex nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
-	autocmd FileType tex nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
-	autocmd FileType tex vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
-	autocmd FileType tex vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
 augroup END
 
 " Plaintext settings
 augroup filetype_plaintext
-   autocmd FileType text setlocal nowrap
 augroup END
 
 " HTML Settings
@@ -355,10 +243,6 @@ augroup filetype_html
 	autocmd FileType html setlocal tabstop=2
 	autocmd FileType html setlocal softtabstop=2
 	autocmd FileType html setlocal sw=2
-	autocmd FileType html nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
-	autocmd FileType html nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
-	autocmd FileType html vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
-	autocmd FileType html vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
 " Pug Settings
@@ -367,43 +251,22 @@ augroup filetype_pug
 	autocmd FileType pug setlocal tabstop=2
 	autocmd FileType pug setlocal softtabstop=2
 	autocmd FileType pug setlocal sw=2
-	autocmd FileType pug nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
-	autocmd FileType pug nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
-	autocmd FileType pug vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
-	autocmd FileType pug vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
 
 " XML Settings
 augroup filetype_xml
-   autocmd!
-	autocmd FileType xml nnoremap <silent> <buffer> <leader>/ <esc>:call MyWrapComment("<!--", "-->")<cr>
-	autocmd FileType xml nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveWrapComment("<!--", "-->")<cr>
-	autocmd FileType xml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockWrapComment("<!--", "-->")<cr>
-	autocmd FileType xml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockWrapComment("<!--", "-->")<cr>
 augroup END
 
 " YML Settings
 augroup filetype_yaml
-	autocmd FileType yaml nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("#")<cr>
-	autocmd FileType yaml nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("#")<cr>
-	autocmd FileType yaml vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("#")<cr>
-	autocmd FileType yaml vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("#")<cr>
 augroup END
 
 " Matlab Settings
 augroup filetype_matlab
-	autocmd FileType matlab nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment("%")<cr>
-	autocmd FileType matlab nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment("%")<cr>
-	autocmd FileType matlab vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment("%")<cr>
-	autocmd FileType matlab vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment("%")<cr>
 augroup END
 
 " vim settings
 augroup filetype_vim
-	autocmd FileType vim nnoremap <silent> <buffer> <leader>/ <esc>:call MyAddComment('" ')<cr>
-	autocmd FileType vim nnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveComment('" ')<cr>
-	autocmd FileType vim vnoremap <silent> <buffer> <leader>/ <esc>:call MyBlockComment('" ')<cr>
-	autocmd FileType vim vnoremap <silent> <buffer> <leader>? <esc>:call MyRemoveBlockComment('" ')<cr>
 augroup END
 
 " gitcommit Settings
