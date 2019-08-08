@@ -86,14 +86,16 @@ set splitbelow
 set splitright
 set wrap
 set linebreak
+set cursorcolumn
+set cursorline
 syntax on
 
 " Highlight settings
 hi Cursor guifg=white guibg=black
 hi Search guibg=LightBlue guifg=#ffffff ctermbg=yellow ctermfg=black
 hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
-hi CursorLine cterm=None ctermbg=blue
-hi CursorColumn ctermbg=blue
+hi CursorLine ctermbg=black cterm=None
+hi CursorColumn ctermbg=black
  
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
