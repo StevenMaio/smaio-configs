@@ -29,6 +29,8 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-misc'
+Plugin 'andymass/vim-matchup'
+Plugin 'RRethy/vim-illuminate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,16 +50,17 @@ let g:user_emmet_leader_key='``' " Edit emmit leader key
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
+" UltiSnips settings
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips" , "/home/stevenmaio/Documents/projects/smaio-vim/mysnippets/"]
-
-" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/.smaio-configs/mysnippets/"]
 let g:UltiSnipsEditSplit="vertical"
+
+" vim-illuminate settings
+let g:Illuminate_delay = 100
+let g:Illuminate_highlightUnderCursor = 1
 
 """"""""""""""""""""""
 " _General_Settings_ "
@@ -241,24 +244,12 @@ augroup END
 augroup filetype_plaintext
 augroup END
 
-" HTML Settings
-augroup filetype_html
+" Indentation settings for XML, HTML, and Pug files
+augroup filetype_html_pug_xml
 	autocmd!
-	autocmd FileType html setlocal tabstop=2
-	autocmd FileType html setlocal softtabstop=2
-	autocmd FileType html setlocal sw=2
-augroup END
-
-" Pug Settings
-augroup filetype_pug
-	autocmd!
-	autocmd FileType pug setlocal tabstop=2
-	autocmd FileType pug setlocal softtabstop=2
-	autocmd FileType pug setlocal sw=2
-augroup END
-
-" XML Settings
-augroup filetype_xml
+	autocmd FileType html,pug,xml setlocal tabstop=2
+	autocmd FileType html,pug,xml setlocal softtabstop=2
+	autocmd FileType html,pug,xml setlocal sw=2
 augroup END
 
 " YML Settings
