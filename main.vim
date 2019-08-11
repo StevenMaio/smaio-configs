@@ -26,11 +26,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'honza/vim-snippets'
 Plugin 'itchyny/lightline.vim'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-misc'
 Plugin 'andymass/vim-matchup'
 Plugin 'RRethy/vim-illuminate'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,6 +160,9 @@ nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_get
 nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 " copy the current selection to the system clipboard
 vnoremap <leader>c "+y
+
+" Macros to remap the insert mode complete commands
+inoremap  
 
 " Windows specific settings
 if has("win32")
