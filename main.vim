@@ -119,7 +119,7 @@ inoremap JK <esc>
 
 " Leader key macros
 " Quickly open my _vimrc
-nnoremap <leader>ev :vsplit<cr>:execute "edit ".g:main_location<cr>
+nnoremap <leader>ev :edit $MYVIMRC<cr>
 " Quickly source _vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " Source the script.vim at root
