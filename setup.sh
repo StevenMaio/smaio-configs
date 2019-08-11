@@ -4,13 +4,17 @@
 #
 # author: stevenmaio
 
-HOME_LOCATION=~/.smaio-configs
-SNIPPETS_DIR=mysnippets
+# Delete previous configurations
+rm -rf ~/.smaio-configs/
 
+# Copy configs that go in $HOME
 cp main.vim ~/.vimrc
 cp tmux.conf ~/.tmux.conf
+
+# Copy zathura configs
+mkdir -p ~/.config/zathura
 cp zathurarc ~/.config/zathura/zathurarc
 
-rm -rf $HOME_LOCATION
-mkdir $HOME_LOCATION $HOME_LOCATION/$SNIPPETS_DIR
-cp $SNIPPETS_DIR/* $HOME_LOCATION/$SNIPPETS_DIR
+# Copy my snippets
+mkdir -p ~/.smaio-configs/mysnippets
+cp mysnippets/* ~/.smaio-configs/mysnippets
