@@ -24,6 +24,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
 Plugin 'honza/vim-snippets'
 Plugin 'itchyny/lightline.vim'
 Plugin 'xolox/vim-notes'
@@ -31,6 +32,8 @@ Plugin 'xolox/vim-misc'
 Plugin 'andymass/vim-matchup'
 Plugin 'RRethy/vim-illuminate'
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'lervag/vimtex'
+Plugin 'editorconfig/editorconfig-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,6 +64,24 @@ let g:UltiSnipsEditSplit="vertical"
 " vim-illuminate settings
 let g:Illuminate_delay = 100
 let g:Illuminate_highlightUnderCursor = 1
+
+" vimtex settings
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+" EditorConfig stuff
+function! FiletypeHook(config)
+    if has_key(a:config, 'vim_filetype')
+        let &filetype = a:config['vim_filetype']
+    endif
+    return 0   " Return 0 to show no error happened
+endfunction
+
+" add a the filetype hook
+call editorconfig#AddNewHook(function('FiletypeHook'))
 
 """"""""""""""""""""""
 " _General_Settings_ "
