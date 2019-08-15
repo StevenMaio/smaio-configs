@@ -132,8 +132,11 @@ set wildignore +=**.pyc
 " _Macros_ "
 """"""""""""
 
-" Turns off the highlights on search results
+" Toggles the highlights on search results
 nnoremap <silent> <Space> :if &hlsearch<CR>set nohlsearch<CR>else<CR>set hlsearch<CR>endif<cr>
+" Turns on hightlight search before starting another search
+nnoremap / :set hlsearch<CR>/
+
 " returns to normal mode
 inoremap jk <esc>
 inoremap JK <esc>
