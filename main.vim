@@ -134,6 +134,7 @@ set wildignore +=**.pyc
 
 " Turns off the highlights on search results
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <c-Space> :set hlsearch<Bar>:echo<CR>
 " returns to normal mode
 inoremap jk <esc>
 inoremap JK <esc>
