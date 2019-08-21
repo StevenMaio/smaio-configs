@@ -26,10 +26,13 @@ copy_configs() {
     # Copy my snippets
     mkdir -p ~/.smaio-configs/mysnippets
     cp mysnippets/* ~/.smaio-configs/mysnippets
+
+    echo "Copying configurations..."
 }
 
 # Installs all of the required software
 install_software() {
+    echo "Installing software..."
     sudo $PM install git tmux ctags zathura vim
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
@@ -39,10 +42,11 @@ print_usage() {
     echo "Usage: setup.sh [command]"
     echo ""
     echo "Commands:"
-    echo "  copy        copy the configuration files. This action is taken if no arguments are given"
-    echo "  install     install the appropriate software"
+    echo "    copy        copy the configuration files. This action is taken if no arguments are given"
+    echo "    install     install the appropriate software"
 }
 
+# Copy if no command is given by default
 if [ $# -lt 1 ]; then
     copy_configs
 else

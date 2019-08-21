@@ -34,6 +34,7 @@ Plugin 'RRethy/vim-illuminate'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'lervag/vimtex'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'easymotion/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -73,6 +74,8 @@ set conceallevel=1
 let g:tex_conceal='abdmg'
 
 " EditorConfig stuff
+
+" Custom Hooks
 function! FiletypeHook(config)
     if has_key(a:config, 'vim_filetype')
         let &filetype = a:config['vim_filetype']
@@ -80,7 +83,7 @@ function! FiletypeHook(config)
     return 0   " Return 0 to show no error happened
 endfunction
 
-" add a the filetype hook
+" Add all of the hooks
 call editorconfig#AddNewHook(function('FiletypeHook'))
 
 """"""""""""""""""""""
@@ -188,11 +191,6 @@ vnoremap <leader>c "+y
 " Macros to remap the insert mode complete commands
 inoremap  
 
-" Windows specific settings
-if has("win32")
-   set shellcmdflag=-command
-endif
-
 """""""""""""""
 " _Functions_ "
 """""""""""""""
@@ -256,48 +254,12 @@ augroup filetype_python
 	autocmd FileType python nnoremap <silent> <buffer> <localleader>pdb Oimport pdb; pdb.set_trace()<esc>
 augroup END
 
-" Java and JavaScript (they're pretty similar)
-augroup filetype_java
-augroup END
-
-augroup filetype_c
-augroup END
-
-" Latex settings
-augroup filetype_latex
-augroup END
-
-" Plaintext settings
-augroup filetype_plaintext
-augroup END
-
 " Indentation settings for XML, HTML, and Pug files
 augroup filetype_html_pug_xml
 	autocmd!
 	autocmd FileType html,pug,xml setlocal tabstop=2
 	autocmd FileType html,pug,xml setlocal softtabstop=2
 	autocmd FileType html,pug,xml setlocal sw=2
-augroup END
-
-" YML Settings
-augroup filetype_yaml
-augroup END
-
-" Matlab Settings
-augroup filetype_matlab
-augroup END
-
-" vim settings
-augroup filetype_vim
-augroup END
-
-" gitcommit Settings
-augroup filetype_gitcommit
-   " NOTE: Nothing is really going on here
-augroup END
-
-" Markdown files
-augroup filetype_markdown
 augroup END
 
 """""""""""
