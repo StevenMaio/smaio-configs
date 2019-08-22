@@ -35,6 +35,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'lervag/vimtex'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'majutsushi/tagbar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -190,6 +191,9 @@ vnoremap <leader>c "+y
 
 " Macros to remap the insert mode complete commands
 inoremap  
+
+" maps agbarToggle
+nnoremap <leader>tt :TagbarToggle<CR>
 
 """""""""""""""
 " _Functions_ "
