@@ -71,8 +71,6 @@ let g:Illuminate_highlightUnderCursor = 1
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
 
 " EditorConfig stuff
 
@@ -86,6 +84,9 @@ endfunction
 
 " Add all of the hooks
 call editorconfig#AddNewHook(function('FiletypeHook'))
+
+" vim-notes configuration
+let g:notes_suffix = ".vnote" "Add a suffix to notes
 
 """"""""""""""""""""""
 " _General_Settings_ "

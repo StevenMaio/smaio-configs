@@ -4,24 +4,29 @@ snippet math "Creates a basic math environment"
 \$ $1 \$$0
 endsnippet
 
+snippet mathd
+\[
+	$1
+\]
+endsnippet
+
 snippet begin "begin{} / end{}" b
 \begin{$1}
 $2
 \end{$1}
-$0
 endsnippet
 
 # Snippets relating to integrals
 snippet "(i+)nt" "Creates an integral" r
-\\`!p snip.rv = match.group(1)`nt $1 \; d$0
+\\`!p snip.rv = match.group(1)`nt ${1:f(x)} \; d${0:x}
 endsnippet
 
 snippet "(i+)nt-" "Creates an integral with a lower bound" r 
-\\`!p snip.rv = match.group(1)`nt_{$1} $2 \; d$0
+\\`!p snip.rv = match.group(1)`nt_{${1:E}} ${2:f} \; d${0:m}
 endsnippet
 
 snippet "(i+)nt-=" "Creates an integral with a lower bound and upper bound" r
-\\`!p snip.rv = match.group(1)`nt_{$1}^{$2} $3 \; d$0
+\\`!p snip.rv = match.group(1)`nt_{${1:a}}^{${2:b}} ${3:f(x)} \; d${0:x}
 endsnippet
 
 # Summation snippets
@@ -54,7 +59,7 @@ endsnippet
 
 # Limits
 snippet lim
-\lim_{$1 \to $2}$0
+\lim_{${1:n} \to ${2:\infty}} ${0:a_{n}}
 endsnippet
 
 snippet limsup
@@ -70,7 +75,7 @@ snippet liminf
 endsnippet
 
 snippet liminf-
-\liminf\limits_{$1 \to $2}$0
+\liminf\limits_{${1:n} \to ${2:\infty}} ${0:a_{n}}
 endsnippet
 
 # Fractions
@@ -79,18 +84,22 @@ snippet frac
 endsnippet
 
 # expand underscore
-snippet -
-_{$1} $0
+snippet - "Creates a character with an underscore" s
+${1:x}_{${2:b}} $0
 endsnippet
 
 #expand overscore +
-snippet +
-^{$1} $0
+snippet + "Creates a character with a superscript" s
+$1^{$2} $0
+endsnippet
+
+snippet -= "Creates a sequence with an underscore and superscript" s
+$1^{$2}_{$3} $0
 endsnippet
 
 # function macro
 snippet fun
-$1 : $2 \to $0
+${1:f} : ${2:A} \to ${0:B}
 endsnippet
 
 snippet "bb(\w+)" "auto blackboard bold" r
@@ -106,6 +115,14 @@ snippet sec "creates a new section"
 $0
 endsnippet
 
-snippet set "Creates a set in LaTeX math"
-\\{ $1 \; : \; $2 \\}$0
+snippet 00 "creates an infinity symbol"
+\infty$0
+endsnippet
+
+snippet setdef "Creates a set in LaTeX math"
+\\{ $1 \; : \; \tex{$2} \\}$0
+endsnippet
+
+snippet set
+\\{ $1 \\} $0
 endsnippet
