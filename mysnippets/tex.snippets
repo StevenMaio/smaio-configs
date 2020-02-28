@@ -10,10 +10,14 @@ snippet mathd
 \]
 endsnippet
 
-snippet begin "begin{} / end{}" b
+snippet beg "begin{} / end{}" b
 \begin{$1}
 $2
 \end{$1}
+endsnippet
+
+snippet begin "inline environment" b
+\begin{$1}$2\end{$1}
 endsnippet
 
 # Snippets relating to integrals
@@ -115,7 +119,7 @@ snippet sec "creates a new section"
 $0
 endsnippet
 
-snippet 00 "creates an infinity symbol"
+snippet 00 "creates an infinity symbol" i
 \infty$0
 endsnippet
 
