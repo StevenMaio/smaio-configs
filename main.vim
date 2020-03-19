@@ -36,6 +36,7 @@ Plugin 'lervag/vimtex'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/utl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -196,6 +197,9 @@ inoremap  
 
 " maps agbarToggle
 nnoremap <leader>tt :TagbarToggle<CR>
+
+" Calls utl (will open a link)
+nnoremap <leader><cr> :Utl<cr>
 
 """""""""""""""
 " _Functions_ "
