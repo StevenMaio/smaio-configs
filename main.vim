@@ -77,10 +77,10 @@ let g:vimtex_quickfix_mode=0
 
 " Custom Hooks
 function! FiletypeHook(config)
-    if has_key(a:config, 'vim_filetype')
-        let &filetype = a:config['vim_filetype']
-    endif
-    return 0   " Return 0 to show no error happened
+if has_key(a:config, 'vim_filetype')
+    let &filetype = a:config['vim_filetype']
+endif
+return 0   " Return 0 to show no error happened
 endfunction
 
 " Add all of the hooks
@@ -89,6 +89,9 @@ call editorconfig#AddNewHook(function('FiletypeHook'))
 " vim-notes configuration
 let g:notes_suffix = ".vnote" "Add a suffix to notes
 let g:notes_directories = ['~/Documents/Notes']
+"
+" Utl
+let g:utl_cfg_hdl_mt_application_pdf = ':silent !zathura %p &'
 
 """"""""""""""""""""""
 " _General_Settings_ "
@@ -127,7 +130,7 @@ hi Search guibg=LightBlue guifg=#ffffff ctermbg=yellow ctermfg=black
 hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
 hi CursorLine ctermbg=black cterm=None
 hi CursorColumn ctermbg=black
- 
+
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
 let maplocalleader = "\\"
@@ -187,8 +190,6 @@ vnoremap <c-e> 5<c-e>
 " opens terminal below and sets the vertical height to be 10 lines
 " I'm sorry for the really long expression :(
 nnoremap <leader>ot :terminal <cr><c-W>k:execute "resize ".(2*getwininfo(win_getid())[0]['height'] - 10)<cr>:echo<cr><c-W>j
-" Opens a small split window for script.vim
-nnoremap <leader>os :split<cr>:e script.vim<cr>:execute "resize 10"<cr>:echo<cr><c-W>j
 " copy the current selection to the system clipboard
 vnoremap <leader>c "+y
 
@@ -199,7 +200,7 @@ inoremap  
 nnoremap <leader>tt :TagbarToggle<CR>
 
 " Calls utl (will open a link)
-nnoremap <leader><cr> :Utl<cr>
+nnoremap <leader>oo :Utl<cr>
 
 """""""""""""""
 " _Functions_ "
@@ -272,6 +273,41 @@ augroup filetype_html_pug_xml
 	autocmd FileType html,pug,xml setlocal sw=2
 augroup END
 
-"""""""""""
-" _Other_ "
-"""""""""""
+" Adds greek letters and mapping (but only for latex files)
+
+let g:my_greek_letters = {
+    \"A": "Alpha",   "a": "alpha",
+    \"B": "Beta",    "b": "beta",
+    \"C": "Xi",     "c": "xi",
+    \"D": "Delta",   "d": "delta",
+    \"E": "Epsilon", "e": "epsilon",
+    \"F": "Phi",     "f": "phi",
+    \"G": "Gamma",   "g": "gamma",
+    \"H": "Theta",   "h": "theta",
+    \"I": "Iota",    "i": "iota",
+    \"K": "Kappa",   "k": "kappa",
+    \"L": "Lambda",  "l": "lambda",
+    \"M": "Mu",      "m": "mu",
+    \"N": "Nu",      "n": "nu",
+    \"O": "Omicron", "o": "omicron",
+    \"P": "Pi",      "p": "pi",
+    \"Q": "Psi",     "q": "psi",
+    \"R": "Rho",     "r": "rho",
+    \"S": "Sigma",   "s": "sigma",
+    \"T": "Tau",     "t": "tau",
+    \"U": "Upsilon", "u": "upsilon",
+    \"W": "Omega",   "w": "omega",
+    \"X": "Chi",     "x": "chi",
+    \"Y": "Eta",    "y": "eta",
+    \"Z": "Zeta",    "z": "zeta",
+    \}
+
+function! MyGetGreekLetter(input)
+    let letter = ""
+    if has_key(g:my_greek_letters, a:input)
+        let letter = "\\".g:my_greek_letters[a:input]
+    endif
+    return letter
+endfunction
+
+autocmd FileType tex inoremap <expr> <c-l> MyGetGreekLetter(nr2char(getchar()))
