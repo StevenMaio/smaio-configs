@@ -1,16 +1,5 @@
-"    Sections:
-"       _Vundle_Jazz_
-"       _Plugin_Settings_
-"       _General_Settings_
-"       _Macros_
-"       _Functions_
-"       _Abbreviations_
-"       _File_Settings_
-"       _Other_
+"{{{ _Vundle_Jazz_
 
-"""""""""""""""""""""
-" _Vundle_Jazz_ "
-"""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -42,21 +31,25 @@ Plugin 'vim-scripts/utl.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"""""""""""""""""""""
-" _Plugin_Settings_ "
-"""""""""""""""""""""
+"}}}
+"{{{ _Plugin_Settings_
 
 let g:netrw_list_hide = '.*\.swp$'
 
-" NERDTre settings
+"{{{ NERDTre settings
+
 let NERDTreeIgnore = ['\.pyc$', '\.png$']  " use this to ignore files in NERDTree
 
-" Emmit configuration settings
+"}}}
+"{{{ Emmit configuration settings
+
 let g:user_emmet_leader_key='``' " Edit emmit leader key
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,xml EmmetInstall
 
-" UltiSnips settings
+"}}}
+"{{{ UltiSnips settings
+
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -64,16 +57,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/.smaio-configs/mysnippets/"]
 let g:UltiSnipsEditSplit="vertical"
 
-" vim-illuminate settings
+"}}}
+"{{{ vim-illuminate settings
+
 let g:Illuminate_delay = 100
 let g:Illuminate_highlightUnderCursor = 1
 
-" vimtex settings
+"}}}
+"{{{ vimtex settings
+
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 
-" EditorConfig stuff
+"}}}
+"{{{ EditorConfig stuff
 
 " Custom Hooks
 function! FiletypeHook(config)
@@ -86,16 +84,21 @@ endfunction
 " Add all of the hooks
 call editorconfig#AddNewHook(function('FiletypeHook'))
 
-" vim-notes configuration
+"}}}
+"{{{ vim-notes configuration
+
 let g:notes_suffix = ".vnote" "Add a suffix to notes
 let g:notes_directories = ['~/Documents/Notes']
-"
-" Utl
+
+"}}}
+"{{{ Utl
+
 let g:utl_cfg_hdl_mt_application_pdf = ':silent !zathura %p &'
 
-""""""""""""""""""""""
-" _General_Settings_ "
-""""""""""""""""""""""
+"}}}
+
+"}}}
+"{{{ _General_Settings_
 
 set belloff=all
 set tabstop=4
@@ -138,9 +141,8 @@ let maplocalleader = "\\"
 " grep ignore
 set wildignore +=**.pyc
 
-""""""""""""
-" _Macros_ "
-""""""""""""
+"}}} END: General_Settings
+"{{{ _Macros_
 
 " Toggles the highlights on search results
 nnoremap <silent> <Space> :if &hlsearch<CR>set nohlsearch<CR>else<CR>set hlsearch<CR>endif<cr>
@@ -202,9 +204,8 @@ nnoremap <leader>tt :TagbarToggle<CR>
 " Calls utl (will open a link)
 nnoremap <leader>oo :Utl<cr>
 
-"""""""""""""""
-" _Functions_ "
-"""""""""""""""
+"}}}
+"{{{ _Functions_
 
 " Creates a side window and syncs up the cursors and scrolling
 function! MyCreateSyncedWindow()
@@ -248,16 +249,14 @@ function! MySourceScriptDotVim()
    endif
 endfunction
 
-"""""""""""""""""""
-" _Abbreviations_ "
-"""""""""""""""""""
+"}}} END: Functions
+"{{{ _Abbreviations_ 
 
 iabbrev @@ stevenmaio.321@gmail.com
 iabbrev adn and
 
-"""""""""""""""""""
-" _File_Settings_ "
-"""""""""""""""""""
+"}}} END: Abbreviations
+"{{{ _File_Settings_
 
 " Python Settings
 augroup filetype_python
@@ -311,3 +310,5 @@ function! MyGetGreekLetter(input)
 endfunction
 
 autocmd FileType tex inoremap <expr> <c-l> MyGetGreekLetter(nr2char(getchar()))
+
+"}}} END: File_Settings
