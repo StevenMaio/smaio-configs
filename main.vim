@@ -149,10 +149,6 @@ nnoremap <silent> <Space> :if &hlsearch<CR>set nohlsearch<CR>else<CR>set hlsearc
 " Turns on hightlight search before starting another search
 nnoremap / :set hlsearch<CR>/
 
-" returns to normal mode
-inoremap jk <esc>
-inoremap JK <esc>
-
 " Leader key macros
 " Quickly open my _vimrc
 nnoremap <leader>ev :edit $MYVIMRC<cr>
