@@ -1,6 +1,17 @@
 # LaTeX snippets
 
-snippet m "Creates a basic math environment"
+global !p
+def math():
+  return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def inmath():
+  return vim.eval('VimtexInInlineMath()') == '1'
+
+def dismath():
+  return vim.eval('VimtexInDisplayMath()') == '1'
+endglobal
+
+snippet mk "Creates a basic math environment" i
 \$$1\$$0
 endsnippet
 
@@ -16,340 +27,120 @@ $2
 \end{$1}
 endsnippet
 
-snippet begin "inline environment" b
-\begin{$1}$2\end{$1}
+# Calculus
+context "math()"
+snippet "(i+)nt" "Creates an integral" riA
+\\`!p snip.rv = match.group(1)`nt_{$1}^{$2} $3 \,\text{d}$0
 endsnippet
 
-# Snippets relating to integrals
-snippet "(i+)nt" "Creates an integral" r
-\\`!p snip.rv = match.group(1)`nt ${1:f(x)} \; d${0:x}
+context "math()"
+snippet ddx "Creates an integral" iA
+\frac{\text{d}$1}{\text{d}$2}$0
 endsnippet
 
-snippet "(i+)nt-" "Creates an integral with a lower bound" r 
-\\`!p snip.rv = match.group(1)`nt_{${1:E}} ${2:f} \; d${0:m}
+context "math()"
+snippet ppx "Creates an integral" iA
+\frac{\partial $1}{\partial $2}$0
 endsnippet
 
-snippet "(i+)nt-=" "Creates an integral with a lower bound and upper bound" r
-\\`!p snip.rv = match.group(1)`nt_{${1:a}}^{${2:b}} ${3:f(x)} \; d${0:x}
+context "math()"
+snippet par "Creates an integral" iA
+\partial_{$1}$0
 endsnippet
 
 # Summation snippets
-snippet sum
-\sum $0
-endsnippet
-
-snippet sum-
-\sum_{$1} $0
-endsnippet
-
-snippet sum-=
-\sum_{$1}^{$2} $0
+context "math()"
+snippet sum "Create a summation" iA
+\sum_{$1}^{$2}$0
 endsnippet
 
 # Product snippets
-snippet prod
-\prod $0
-endsnippet
-
-# Product snippets
-snippet prod-
-\prod_{$1} $0
-endsnippet
-
-# Product snippets
-snippet prod-=
+context "math()"
+snippet prod "Create a product" iA
 \prod_{$1}^{$2}$0
 endsnippet
 
 # Limits
-snippet lim
-\lim_{${1:n} \to ${2:\infty}} ${0:a_{n}}
+context "math()"
+snippet lim "Creata a limit" i
+\lim_{$1}$0
 endsnippet
 
-snippet limsup
-\limsup $1$
+context "math()"
+snippet limsup "Create a limsup" i
+\limsup_{$1}$0
 endsnippet
 
-snippet limsup-
-\limsup\limits_{$1 \to $2}$0
+context "math()"
+snippet liminf "create a liminf" i
+\liminf_{$1}$0
 endsnippet
 
-snippet liminf
-\liminf $0
+context "math()"
+snippet [] "Create brackets" i
+\left[$1\right]$0
 endsnippet
 
-snippet liminf-
-\liminf\limits_{${1:n} \to ${2:\infty}} ${0:a_{n}}
+context "math()"
+snippet () "Create parenthesis" i
+\left($1\right)$0
+endsnippet
+
+context "math()"
+snippet || "Create absolute values" i
+\left|$1\right|$0
+endsnippet
+
+context "math()"
+snippet norm "Create absolute values" i
+\left\|$1\right\|$0
+endsnippet
+
+context "math()"
+snippet {} "Create braces" i
+\left\\{$1\right\\}$0
+endsnippet
+
+context "math()"
+snippet <> "Create angle brackets" i
+\left\langle{$1}\right\rangle$0
+endsnippet
+
+context "math()"
+snippet \\ "create a backslash" i
+\backslash$0
 endsnippet
 
 # Fractions
-snippet frac
+context "math()"
+snippet // "create a fraction" iA
 \frac{$1}{$2}$0
 endsnippet
 
 # expand underscore
-snippet - "Creates a character with an underscore" s
-${1:x}_{${2:b}} $0
+context "math()"
+snippet _ "Creates a subscript" iA
+_{$1}$0
 endsnippet
 
+context "math()"
 #expand overscore +
-snippet + "Creates a character with a superscript" s
-$1^{$2} $0
+snippet ^ "Creates a superscript" iA
+^{$1}$0
 endsnippet
 
-snippet -= "Creates a sequence with an underscore and superscript" s
-$1^{$2}_{$3} $0
+## I don't use this..., but I want to save it for later. It's a good reference
+#context "math()"
+#snippet "bb(\w+)" "auto blackboard bold" ri
+#\\mathbb{`!p snip.rv = match.group(1)`}$0
+#endsnippet
+
+context "math()"
+snippet txt "auto expand text" iA
+\text{$1}$0
 endsnippet
 
-# function macro
-snippet fun
-${1:f} : ${2:A} \to ${0:B}
-endsnippet
-
-snippet "bb(\w+)" "auto blackboard bold" r
-\\mathbb{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-snippet "cal(\w+)" "auto math caligraphy" r
-\\mathcal{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-snippet sec "creates a new section"
-\\section{$1}
+snippet sec "creates a new section" b
+\section{$1}
 $0
-endsnippet
-
-snippet 00 "creates an infinity symbol" i
-\infty$0
-endsnippet
-
-snippet setdef "Creates a set in LaTeX math"
-\\{ $1 \; : \; \tex{$2} \\}$0
-endsnippet
-
-snippet set
-\\{ $1 \\} $0
-endsnippet
-
-# Germany characters for convenience
-snippet ß "hooked s" iA
-{\ss}
-endsnippet
-
-snippet ä "" iA
-{\"a}
-endsnippet
-
-snippet Ä "" iA
-{\"A}
-endsnippet
-
-snippet ö "" iA
-{\"o}
-endsnippet
-
-snippet Ö "" iA
-{\"O}
-endsnippet
-
-snippet ü "" iA
-{\"u}
-endsnippet
-
-snippet Ü "" iA
-{\"u}
-endsnippet
-
-#Greek letters for convenience
-
-snippet α "alpha" iA
-\alpha
-endsnippet
-
-snippet Α "Alpha" iA
-\Alpha
-endsnippet
-
-snippet β "beta" iA
-\beta
-endsnippet
-
-snippet Β "Beta" iA
-\Beta
-endsnippet
-
-snippet γ "gamma" iA
-\gamma
-endsnippet
-
-snippet Γ "Gamma" iA
-\Gamma
-endsnippet
-
-snippet δ "delta" iA
-\delta
-endsnippet
-
-snippet Δ "Delta" iA
-\Delta
-endsnippet
-
-snippet ε "epsilon" iA
-\epsilon
-endsnippet
-
-snippet Ε "Epsilon" iA
-\Epsilon
-endsnippet
-
-snippet ζ "zeta" iA
-\zeta
-endsnippet
-
-snippet Ζ "Zeta" iA
-\Zeta
-endsnippet
-
-snippet η "eta" iA
-\eta
-endsnippet
-
-snippet Η "Eta" iA
-\Eta
-endsnippet
-
-snippet θ "theta" iA
-\theta
-endsnippet
-
-snippet Θ "Theta" iA
-\Theta
-endsnippet
-
-snippet ι "iota" iA
-\iota
-endsnippet
-
-snippet Ι "Iota" iA
-\Iota
-endsnippet
-
-snippet κ "kappa" iA
-\kappa
-endsnippet
-
-snippet Κ "Kappa" iA
-\Kappa
-endsnippet
-
-snippet λ "lambda" iA
-\lambda
-endsnippet
-
-snippet Λ "Lambda" iA
-\Lambda
-endsnippet
-
-snippet μ "mu" iA
-\mu
-endsnippet
-
-snippet Μ "Mu" iA
-\Mu
-endsnippet
-
-snippet ν "nu" iA
-\nu
-endsnippet
-
-snippet Ν "Nu" iA
-\Nu
-endsnippet
-
-snippet ξ "xi" iA
-\xi
-endsnippet
-
-snippet Ξ "Xi" iA
-\Xi
-endsnippet
-
-snippet ο "omicron" iA
-\omicron
-endsnippet
-
-snippet Ο "Omicron" iA
-\Omicron
-endsnippet
-
-snippet π "π" iA
-\pi
-endsnippet
-
-snippet Π "Pi" iA
-\Pi
-endsnippet
-
-snippet ρ "rho" iA
-\rho
-endsnippet
-
-snippet Ρ "Rho" iA
-\Rho
-endsnippet
-
-snippet σ "sigma" iA
-\sigma
-endsnippet
-
-snippet Σ "Sigma" iA
-\Sigma
-endsnippet
-
-snippet τ "tau" iA
-\tau
-endsnippet
-
-snippet Τ "Tau" iA
-\Tau
-endsnippet
-
-snippet υ "upsilon" iA
-\upsilon
-endsnippet
-
-snippet Υ "Upsilon" iA
-\Upsilon
-endsnippet
-
-snippet φ "phi" iA
-\phi
-endsnippet
-
-snippet Φ "Phi" iA
-\Phi
-endsnippet
-
-snippet χ "chi" iA
-\chi
-endsnippet
-
-snippet Χ "Chi" iA
-\Chi
-endsnippet
-
-snippet ψ "psi" iA
-\psi
-endsnippet
-
-snippet Ψ "Psi" iA
-\Psi
-endsnippet
-
-snippet ω "omega" iA
-\omega
-endsnippet
-
-snippet Ω "Omega" iA
-\Omega
 endsnippet

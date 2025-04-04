@@ -4,31 +4,27 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
-Plugin 'honza/vim-snippets'
-Plugin 'itchyny/lightline.vim'
-Plugin 'xolox/vim-notes'
-Plugin 'xolox/vim-misc'
-Plugin 'andymass/vim-matchup'
-Plugin 'RRethy/vim-illuminate'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'lervag/vimtex'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/utl.vim'
+Plug 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'itchyny/lightline.vim'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+Plug 'andymass/vim-matchup'
+Plug 'RRethy/vim-illuminate'
+Plug 'lervag/vimtex'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/utl.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 
 "}}}
@@ -51,8 +47,8 @@ autocmd FileType html,css,xml EmmetInstall
 "{{{ UltiSnips settings
 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips" , $HOME."/.smaio-configs/mysnippets/"]
 let g:UltiSnipsEditSplit="vertical"
@@ -67,7 +63,7 @@ let g:Illuminate_highlightUnderCursor = 1
 "{{{ vimtex settings
 
 let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 
 "}}}
@@ -123,8 +119,6 @@ set splitbelow
 set splitright
 set wrap
 set linebreak
-set cursorcolumn
-set cursorline
 syntax on
 
 " Highlight settings
