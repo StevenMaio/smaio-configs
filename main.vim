@@ -22,6 +22,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/utl.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'girishji/vimcomplete'
+Plug 'girishji/scope.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -66,6 +69,64 @@ let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 
+set conceallevel=2
+
+call vimtex#imaps#add_map({
+    \ 'lhs': 'b',
+    \ 'rhs': '\bm',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "'",
+    \ 'rhs': '\prime',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+
+" bars, tilde, hat, vec?
+call vimtex#imaps#add_map({
+    \ 'lhs': "o",
+    \ 'rhs': '\bar',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "wo",
+    \ 'rhs': '\overline',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "t",
+    \ 'rhs': '\tilde',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "wt",
+    \ 'rhs': '\widetilde',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "h",
+    \ 'rhs': '\hat',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "wh",
+    \ 'rhs': '\widehat',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "v",
+    \ 'rhs': '\vec',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+
 "}}}
 "{{{ EditorConfig stuff
 
@@ -101,7 +162,6 @@ set tabstop=4
 set sw=4
 set softtabstop=4
 set expandtab
-set number
 set foldenable
 set wildmenu
 set showmatch
@@ -119,14 +179,20 @@ set splitbelow
 set splitright
 set wrap
 set linebreak
+set number
+set rnu
 syntax on
 
 " Highlight settings
-hi Cursor guifg=white guibg=black
+"hi Cursor guifg=white guibg=black
 hi Search guibg=LightBlue guifg=#ffffff ctermbg=yellow ctermfg=black
 hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
-hi CursorLine ctermbg=black cterm=None
-hi CursorColumn ctermbg=black
+"hi CursorLine ctermbg=black cterm=None
+"hi CursorColumn ctermbg=black
+
+color peachpuff
+set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
 
 " Set leader key (type <leader> to use it)
 let mapleader = "-"
@@ -152,8 +218,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ss :call MySourceScriptDotVim()<cr>
 " Source current file
 nnoremap <leader>so :source %<cr>
-" quickly closes the current tab
-nnoremap <leader>tc :tabclose<cr>
+" quickly closes the current tab TODO: change 
+nnoremap <leader>ct :call ToggleVimComplete()<cr>
 " Toggle smart case
 nnoremap <leader>ic :set ignorecase! <cr> :set smartcase! <cr>
 " wraps the current word in whatever ` is
@@ -262,43 +328,18 @@ augroup filetype_html_pug_xml
 	autocmd FileType html,pug,xml setlocal sw=2
 augroup END
 
-" Adds greek letters and mapping (but only for latex files)
-
-let g:my_greek_letters = {
-    \"A": "Alpha",   "a": "alpha",
-    \"B": "Beta",    "b": "beta",
-    \"C": "Xi",     "c": "xi",
-    \"D": "Delta",   "d": "delta",
-    \"E": "Epsilon", "e": "epsilon",
-    \"F": "Phi",     "f": "phi",
-    \"G": "Gamma",   "g": "gamma",
-    \"H": "Theta",   "h": "theta",
-    \"I": "Iota",    "i": "iota",
-    \"K": "Kappa",   "k": "kappa",
-    \"L": "Lambda",  "l": "lambda",
-    \"M": "Mu",      "m": "mu",
-    \"N": "Nu",      "n": "nu",
-    \"O": "Omicron", "o": "omicron",
-    \"P": "Pi",      "p": "pi",
-    \"Q": "Psi",     "q": "psi",
-    \"R": "Rho",     "r": "rho",
-    \"S": "Sigma",   "s": "sigma",
-    \"T": "Tau",     "t": "tau",
-    \"U": "Upsilon", "u": "upsilon",
-    \"W": "Omega",   "w": "omega",
-    \"X": "Chi",     "x": "chi",
-    \"Y": "Eta",    "y": "eta",
-    \"Z": "Zeta",    "z": "zeta",
-    \}
-
-function! MyGetGreekLetter(input)
-    let letter = ""
-    if has_key(g:my_greek_letters, a:input)
-        let letter = "\\".g:my_greek_letters[a:input]
-    endif
-    return letter
-endfunction
-
-autocmd FileType tex inoremap <expr> <c-l> MyGetGreekLetter(nr2char(getchar()))
-
 "}}} END: File_Settings
+"{{{ VimComplete Stuff
+
+let g:vimcomplete_enabled = 1
+
+function! ToggleVimComplete()
+    if g:vimcomplete_enabled == 1
+        VimCompleteDisable
+        let g:vimcomplete_enabled = 0
+    else
+        VimCompleteEnable
+        let g:vimcomplete_enabled = 1
+    endif
+endfunction
+"}}}

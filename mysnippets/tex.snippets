@@ -17,35 +17,30 @@ endsnippet
 
 snippet md
 \[
-	$1
+	$0
 \]
 endsnippet
 
-snippet beg "begin{} / end{}" b
+snippet beg "begin{} / end{}"
 \begin{$1}
-$2
+$0
 \end{$1}
 endsnippet
 
 # Calculus
 context "math()"
 snippet "(i+)nt" "Creates an integral" riA
-\\`!p snip.rv = match.group(1)`nt_{$1}^{$2} $3 \,\text{d}$0
+\\`!p snip.rv = match.group(1)`nt_{$1}^{$2} $3 \,\mathrm{d}$0
 endsnippet
 
 context "math()"
 snippet ddx "Creates an integral" iA
-\frac{\text{d}$1}{\text{d}$2}$0
+\frac{\mathrm{d}$1}{\mathrm{d}$2}$0
 endsnippet
 
 context "math()"
 snippet ppx "Creates an integral" iA
 \frac{\partial $1}{\partial $2}$0
-endsnippet
-
-context "math()"
-snippet par "Creates an integral" iA
-\partial_{$1}$0
 endsnippet
 
 # Summation snippets
@@ -67,12 +62,12 @@ snippet lim "Creata a limit" i
 endsnippet
 
 context "math()"
-snippet limsup "Create a limsup" i
+snippet limsup "Create a limsup" iA
 \limsup_{$1}$0
 endsnippet
 
 context "math()"
-snippet liminf "create a liminf" i
+snippet liminf "create a liminf" iA
 \liminf_{$1}$0
 endsnippet
 
@@ -123,8 +118,8 @@ snippet _ "Creates a subscript" iA
 _{$1}$0
 endsnippet
 
-context "math()"
 #expand overscore +
+context "math()"
 snippet ^ "Creates a superscript" iA
 ^{$1}$0
 endsnippet
@@ -137,7 +132,20 @@ endsnippet
 
 context "math()"
 snippet txt "auto expand text" iA
-\text{$1}$0
+\mathrm{$1}$0
+endsnippet
+
+context "math()"
+snippet bf "bold text inside math" i
+\boldsymbol{$1}$0
+endsnippet
+
+snippet bf "bold text" i
+\textbf{$1}$0
+endsnippet
+
+snippet it "italic text" i
+\textit{$1}$0
 endsnippet
 
 snippet sec "creates a new section" b
