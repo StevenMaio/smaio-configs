@@ -7,14 +7,11 @@ filetype off                  " required
 call plug#begin()
 
 " let Vundle manage Vundle, required
-Plug 'mattn/emmet-vim'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'itchyny/lightline.vim'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
 Plug 'andymass/vim-matchup'
 Plug 'RRethy/vim-illuminate'
 Plug 'lervag/vimtex'
@@ -40,13 +37,6 @@ let g:netrw_list_hide = '.*\.swp$'
 let NERDTreeIgnore = ['\.pyc$', '\.png$']  " use this to ignore files in NERDTree
 
 "}}}
-"{{{ Emmit configuration settings
-
-let g:user_emmet_leader_key='``' " Edit emmit leader key
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,xml EmmetInstall
-
-"}}}
 "{{{ UltiSnips settings
 
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -70,6 +60,7 @@ let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 
 set conceallevel=2
+" I think we can use $ as a leader key as well
 
 call vimtex#imaps#add_map({
     \ 'lhs': 'b',
@@ -80,49 +71,71 @@ call vimtex#imaps#add_map({
 call vimtex#imaps#add_map({
     \ 'lhs': "'",
     \ 'rhs': '\prime',
+    \ 'leader': '`',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "#",
+    \ 'rhs': '\sharp',
+    \ 'leader': '`',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+call vimtex#imaps#add_map({
+    \ 'lhs': "\\|",
+    \ 'rhs': '\\|',
+    \ 'leader': '`',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 
 " bars, tilde, hat, vec?
 call vimtex#imaps#add_map({
-    \ 'lhs': "o",
+    \ 'lhs': "-",
     \ 'rhs': '\bar',
     \ 'leader': '#',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
-    \ 'lhs': "wo",
+    \ 'lhs': "-",
     \ 'rhs': '\overline',
-    \ 'leader': '#',
+    \ 'leader': '`',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
-    \ 'lhs': "t",
+    \ 'lhs': "~",
     \ 'rhs': '\tilde',
     \ 'leader': '#',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
-    \ 'lhs': "wt",
+    \ 'lhs': "~",
     \ 'rhs': '\widetilde',
-    \ 'leader': '#',
+    \ 'leader': '`',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
-    \ 'lhs': "h",
+    \ 'lhs': "^",
     \ 'rhs': '\hat',
     \ 'leader': '#',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
-    \ 'lhs': "wh",
+    \ 'lhs': "^",
     \ 'rhs': '\widehat',
-    \ 'leader': '#',
+    \ 'leader': '`',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
 call vimtex#imaps#add_map({
+    "\ 'lhs': "->",
     \ 'lhs': "v",
     \ 'rhs': '\vec',
+    \ 'leader': '#',
+    \ 'wrapper' : 'vimtex#imaps#wrap_math'
+    \})
+
+call vimtex#imaps#add_map({
+    \ 'lhs': "t",
+    \ 'rhs': 'vimtex#imaps#style_math("mathrm")',
+    \ 'expr': 1,
     \ 'leader': '#',
     \ 'wrapper' : 'vimtex#imaps#wrap_math'
     \})
@@ -140,12 +153,6 @@ endfunction
 
 " Add all of the hooks
 call editorconfig#AddNewHook(function('FiletypeHook'))
-
-"}}}
-"{{{ vim-notes configuration
-
-let g:notes_suffix = ".vnote" "Add a suffix to notes
-let g:notes_directories = ['~/Documents/Notes']
 
 "}}}
 "{{{ Utl
@@ -190,7 +197,7 @@ hi Visual guifg=#000000 guibg=#ffffff gui=none ctermfg=black ctermbg=white
 "hi CursorLine ctermbg=black cterm=None
 "hi CursorColumn ctermbg=black
 
-color peachpuff
+color zaibatsu
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
 
@@ -308,8 +315,8 @@ endfunction
 "}}} END: Functions
 "{{{ _Abbreviations_ 
 
-iabbrev @@ stevenmaio.321@gmail.com
-iabbrev adn and
+"iabbrev @@ stevenmaio.321@gmail.com
+"iabbrev adn and
 
 "}}} END: Abbreviations
 "{{{ _File_Settings_
